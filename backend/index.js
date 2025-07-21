@@ -194,113 +194,205 @@ const linkedInResults = await page.$$eval('div.snippet', (elements) => {
 
      console.log(`came from puppeteer:${linkedInResults}`)
 console.log(data)
-let bangerPrompt = ` Your an smart and professional linkedin post writer who writes a banger for an idea for a linkedin post ,you have to only return the banger hook nothing else or your message only banger
-First line matters—make it punchy.
+let bangerPrompt = `You're a smart and professional LinkedIn post writer who creates scroll-stopping hooks that solve problems and deliver immediate value.
 
-❌ “I just finished a project.”
+Your hook MUST:
+1. Lead with a PROBLEM or PAIN POINT your audience faces (not your achievement)
+2. Promise SPECIFIC VALUE or transformation they'll get
+3. Use FRESH angles - avoid overused phrases like "Forget ChatGPT" or generic claims
+4. Create genuine CURIOSITY with concrete details, not vague benefits
 
-✅ “I turned 1,000 lines of spaghetti code into a one-click deploy—here’s how.”
+HOOK FORMULA:
+- Start with the reader's struggle/frustration
+- Hint at the surprising solution or result
+- Make it specific and credible (numbers, timeframes, concrete outcomes)
+DO NOT USE EXAMPLES EXPLICITLY THEY ARE JUST FOR EXAMPLE
+Exmaples
+❌ "I just built an AI tool"  
+✅ "I spent 47 hours manually writing LinkedIn posts until I built something that does it in 30 seconds"
 
-Use emojis or bold to make that opener pop in the feed.
-style/styles:${styles}
- the idea is : ${data.input}`
+❌ "Forget ChatGPT"  
+✅ "ChatGPT gave me generic posts. This gives me posts that get 10x more comments"
+
+Use emojis strategically to break up text and add visual interest.
+Return ONLY the banger hook - nothing else.
+
+Style: ${styles}
+The idea: ${data.input}`
  let hook = await Banger(bangerPrompt)
  console.log(hook)
 let BodyPrompt = `
-You are a smart and professional LinkedIn content writer agent. Your job is to generate ONLY the **body section** of a LinkedIn post — nothing else.
+You are a smart and professional LinkedIn content writer agent. Your job is to generate ONLY the **body section** of a LinkedIn post that drives engagement through concrete value and proof.
 
 ---
-
 ❌ You must NOT include:
 - Hooks
-- Hashtags
+- Hashtags  
 - Call-to-action (CTA)
 - Lessons learned or takeaways
 - Code snippets (unless explicitly mentioned)
 - Marketing, promotional, or salesy tone
 - Repetition of the hook or unnecessary restating
-
 ---
 
-📌 Your mission is to **expand** the given hook into a compelling, engaging, and scroll-stopping body that feels real and resonates with LinkedIn readers.
+📌 Your mission is to **expand** the given hook into a compelling, engaging body that provides CONCRETE VALUE and PROOF.
 
-📣 Hook:  
-"${hook}"
-
-🎨 Style (selected by user):  
-${styles}  
-🧠 Topic/Idea:  
-${data.input}
+📣 Hook: "${hook}"
+🎨 Style: ${styles}  
+🧠 Topic/Idea: ${data.input}
 
 ---
-
 ✅ **What You MUST Do**:
-- Continue the narrative in a natural, conversational way
-- Match the **tone, formatting, and length** to the selected style
-- Use **short paragraphs**, whitespace, and **bullet points** (if it fits the tone) for readability
-- Make the post feel like it was written by a human who actually uses LinkedIn
-- Show a believable moment, mini-story, personal POV, or relatable insight that reflects the hook
-- Use **emojis only** if the selected style supports it (e.g., casual, happy, emoji-rich)
-- If the style is "long" or "thoughtful", go slightly deeper but stay interesting and digestible
-- If the style is "short", "funny", or "emoji", focus on punchy flow and rhythm
-- Speak with authenticity. Make the post feel relatable, not robotic.
+
+**STRUCTURE (Keep it scannable)**:
+- Use 1-2 sentence paragraphs MAX
+- Add line breaks every 2-3 lines for mobile readability
+- Use bullet points, numbers, or emojis to break up text visually
+
+**CONTENT REQUIREMENTS**:
+- Replace ALL buzzwords with SPECIFIC details (don't say "understands the vibe" - say "analyzes 10,000 top posts to match LinkedIn's algorithm")
+- Include CONCRETE BENEFITS with numbers/results ("saves 2 hours per post" not "saves time")  
+- Add PROOF elements: specific examples, mini case studies, or "here's what happened when I..."
+- Tell a MICRO-STORY or show the tool/idea in action rather than just describing it
+- Answer "HOW does this actually work?" with step-by-step specifics
+
+**ENGAGEMENT ELEMENTS**:
+- Include relatable moments readers will recognize
+- Add surprising insights or "aha moments" 
+- Use conversational transitions like "Here's the thing..." or "But here's what surprised me..."
 
 ---
-
-⚠️ **Avoid These Mistakes**:
-- ❌ No dense paragraph blocks — break content visually for mobile scroll-readers
-- ❌ No vague passive phrases like “it feels like…” or “it’s incredible…” unless grounded with **examples**
-- ❌ No generic claims — illustrate your point with specific, vivid actions (e.g., "I typed in 'building in public' and it gave me...")
-
----
-
-🚫 You are NOT:
-- A CTA writer
-- A marketer
-- A hook generator
-- A life coach
-
-You are ONLY responsible for the **body text**, written in the selected style, and optimized for LinkedIn readability.
+⚠️ **Eliminate These Body Killers**:
+- ❌ NO walls of text - break every 2-3 lines
+- ❌ NO vague descriptions - every claim needs proof/specifics
+- ❌ NO generic benefits - show exact outcomes with numbers
+- ❌ NO boring explanations - turn features into stories/examples
+- ❌ NO missing proof - add screenshots, results, or specific examples
 
 ---
-
-🎯 Output Format Rules:
-- No explanations, no markdown, no commentary
-- Just return the final raw body copy, as if it's going live on LinkedIn right now
-- Format it naturally with line breaks and structure based on the style
-
+🎯 Output: Return ONLY the body text formatted for LinkedIn with proper line breaks and visual structure based on the selected style.
 `;
-
  let Bodyhook = await Body(BodyPrompt)
   console.log(Bodyhook)
- let LearnPrompt = `Your an smart and professional linkedin post writer you only write what you have learned from the experience nothing else you have to just return what you have learned and no messages from you,you should not put hashtags
- this is the attention line or hook bang written ,this is the hook:${hook}
- this is the body or the main part of the post ,continue from here with your assigned role with the style and without repetition,the body:${Bodyhook}
+ let LearnPrompt = `You're a smart and professional LinkedIn post writer who extracts ACTIONABLE INSIGHTS that readers can immediately apply. You only write what you have learned from the experience - nothing else.
 
- **Make it defaulty short paragraph or bullet points depending on situation**
- style/styles:${styles}
- the topic/idea/prompt : ${data.input}
- `
+📣 Hook: ${hook}
+📝 Body: ${Bodyhook}
+🎨 Style: ${styles}
+💡 Topic: ${data.input}
+
+---
+✅ **What You MUST Deliver**:
+
+**ACTIONABLE INSIGHTS ONLY**:
+- Provide SPECIFIC tactics readers can use today (not tomorrow, not someday - TODAY)
+- Include exact steps, frameworks, or methods discovered
+- Share BEHIND-THE-SCENES details that reveal HOW things actually work
+- Give concrete examples with numbers/timeframes when possible
+
+**AVOID GENERIC ADVICE**:
+❌ "Be consistent" → ✅ "Post at 8:47 AM EST - that's when I get 3x more comments"
+❌ "Quality content matters" → ✅ "Posts with 3-5 bullet points get 40% more engagement than paragraphs"
+❌ "Use AI tools" → ✅ "I feed it my rough idea + one competitor post, and it outputs 5 variations in 30 seconds"
+
+**REVEAL THE PROCESS**:
+- Explain technical details in simple terms that add real value
+- Share what you discovered that others don't know
+- Include unexpected findings or surprising results
+- Show the "why" behind what works
+
+---
+📋 **Format Requirements**:
+- Default to SHORT paragraphs (1-2 sentences max) 
+- Use bullet points ONLY when listing specific steps/tactics
+- Match the selected style while keeping insights punchy and scannable
+- NO hashtags, NO repetition from hook/body
+
+---
+🎯 **Output**: Return ONLY the learnings section with immediately usable insights that continue naturally from the body without repetition.
+`;
  let Learnhook = await Learn(LearnPrompt)
  console.log(Learnhook)
 
- let CtaPrompt = `Your an smart and professional linkedin post writer you only write CTA in an engaging way and make invitations and you return that ,nothing else just the CTA AND INVITATIONS ,no messages from you,you should not put hashtags
- style/styles:${styles}
-  this is the attention line or hook bang written,this is the hook:${hook}
- this is the body or the main part of the post ,the body:${Bodyhook}
- this is the learning hook ,the learning hook:${Learnhook}
- the topic/idea/prompt : ${data.input}
- `
+let CtaPrompt = `You're a smart and professional LinkedIn post writer who creates COMPELLING CTAs that drive immediate action. You only write the CTA and invitations - nothing else.
+
+📣 Hook: ${hook}
+📝 Body: ${Bodyhook}
+🧠 Learnings: ${Learnhook}
+🎨 Style: ${styles}
+💡 Topic: ${data.input}
+
+---
+✅ **What You MUST Create**:
+
+**SINGLE, CLEAR ACTION**:
+- Choose ONE specific action (not multiple options that create confusion)
+- Make it the EASIEST possible next step for readers
+- Use action words that create urgency and excitement
+
+**COMPELLING VALUE PROMISE**:
+- Be SPECIFIC about what they'll get (not vague "learn more")
+- Include concrete benefits or outcomes they'll receive
+- Make the value immediate and tangible
+
+**ENGAGEMENT-DRIVEN WORDING**:
+❌ "Drop 🚀 OR send DM" → ✅ "Comment 'SEND IT' and I'll share the link in your DMs"
+❌ "Learn how this tool works" → ✅ "Want the exact prompt I used? Comment 'PROMPT' below"
+❌ "Let me know your thoughts" → ✅ "What's your biggest LinkedIn writing struggle? Drop it below 👇"
+
+---
+📋 **CTA Requirements**:
+- Lead with action verbs (Comment, Share, Try, Get, Join)
+- Include specific words/emojis for easy engagement
+- Make it feel like an invitation, not a demand
+- Match the energy and style of the post
+- NO hashtags, NO multiple options
+- Keep it conversational and authentic to LinkedIn culture
+
+---
+🎯 **Output**: Return ONLY the CTA section that flows naturally from the learnings and drives ONE clear action with compelling, specific value.
+`;
  let ctaHook =await Cta(CtaPrompt);
  
- let hashPrompt = `Your an smart and professional linkedin post writer you only write hashtags (4-5) that might get the highest engagement we can get and only return hashtags and do not return anything else
-  the topic/idea/prompt : ${data.input}
- attention:${hook}
- body:${Bodyhook}
- learnings:${Learnhook}
- Cta:${ctaHook}
- continue from here to generate the best hashtags that will get the most engagement`
-  
+ let hashPrompt = `You're a smart and professional LinkedIn post writer who creates STRATEGIC hashtags that maximize engagement through niche targeting and optimal mix.
+
+📣 Hook: ${hook}
+📝 Body: ${Bodyhook}
+🧠 Learnings: ${Learnhook}
+💬 CTA: ${ctaHook}
+💡 Topic: ${data.input}
+
+---
+✅ **Strategic Hashtag Formula (4-5 hashtags ONLY)**:
+
+**MIX REQUIREMENTS**:
+1. **1 NICHE-SPECIFIC** hashtag (targets exact audience: #IndieHackers, #DevRel, #TechFounders)
+2. **1 COMMUNITY** hashtag (active LinkedIn communities: #BuildInPublic, #LinkedInCreators)
+3. **1 TRENDING/TIMELY** hashtag (current but relevant: #AIInnovation, #WebDev2025)
+4. **1-2 MEDIUM COMPETITION** hashtags (10K-100K posts, not oversaturated)
+
+**AVOID THESE GENERIC KILLERS**:
+❌ #ContentMarketing #AITools #Marketing #Business #Technology #Innovation
+❌ Hashtags with 1M+ posts (oversaturated)
+❌ Too broad hashtags that don't target specific audience
+
+**TARGETING STRATEGY**:
+- Analyze the post content to identify EXACT target audience (founders, developers, marketers, etc.)
+- Choose hashtags where your SPECIFIC audience actually hangs out
+- Mix popular community tags with niche professional tags
+- Include hashtags that match the post's energy level and topic depth
+
+---
+🎯 **Output Rules**:
+- Return ONLY 4-5 hashtags
+- Each on a new line with # symbol
+- No explanations or commentary
+- Prioritize engagement potential over follower count
+- Target the specific professional community most likely to engage with this exact content
+
+---
+**Final Check**: Do these hashtags target people who would actually COMMENT and SHARE this specific post? If not, make them more niche and targeted.
+`;
  let Hashed = await Hash(hashPrompt)
 
     
