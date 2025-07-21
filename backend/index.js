@@ -99,7 +99,8 @@ app.use(cors())
 app.use(express.json())
 app.post('/scrape',async(req,res)=>{
   
-    let data = req.body.input
+  try {
+      let data = req.body.input
 
     let styles = []
 if(data.formal){
@@ -158,71 +159,7 @@ site:linkedin.com/in <role> <company/keyword> <location>
  let tags = await Tag(tagPrompt)
  console.log(`These are tags:${tags}`)
 
-try {
-   const browser = await puppeteer.launch({
-  headless:true,
-  executablePath:actualPup.executablePath,
-  args: ['--no-sandbox', '--disable-setuid-sandbox'],
- });
-  const page = await browser.newPage();
-   let encodedcomp = encodeURIComponent(tags)
-let googleSearch = `https://search.brave.com/search?q=${encodedcomp}`
-  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
 
-const linkedInResults = await page.$$eval('div.snippet', (elements) => {
-  return elements.map((e) => {
-    const aTag = e.querySelector('a').href;
-    const title = e.querySelector('.title')?.innerText || '';
-    const description = e.querySelector('.snippet-description')?.innerText || '';
-
-    return {title:title,
-      link:aTag,
-      description:description
-    }
-  }) 
-});
-
-const tagDecisionPrompt = `
-You are an expert LinkedIn engagement assistant. Based on the following Brave search results, your job is to analyze and recommend the **best 3 LinkedIn profiles to tag** in a post to maximize relevance and engagement.
-
-🧠 **Selection Criteria:**
-- Person should be related to **DevRel / Developer Relations / Developer Advocacy**
-- Should have a connection to **Google** or past DevRel work at Google
-- Prefer those located in **India** or similar regions
-- Avoid celebrities or VPs (e.g., Sundar Pichai)
-- Prefer those who are **active on LinkedIn** or have strong recent presence
-- Prioritize **diversity** and relevance in the 3 suggestions
-
-📄 **Data (Each Object = Search Result):**
-${JSON.stringify(linkedInResults, null, 2)}
-
-📌 **Instructions:**
-- Output must be in **pure HTML** — no markdown or plain text
-- Use <p> to separate each person
-- Use <strong> to highlight names and titles
-- Mention people using @FullName where full name is available
-- Embed profile link using an anchor tag like:
-  <a href="https://..." target="_blank">View Profile</a>
-- Do **not** return explanations outside the 3 choices
-- No extra HTML wrappers like <html> or <body>
-
-✍️ **Your Output Format Example:**
-
-<p><strong>1. @Elizabeth Mathew – DevRel Engineer at SigNoz</strong><br>
-Selected for active DevRel work, internship at Google, and strong India presence.<br>
-<a href="https://www.linkedin.com/in/elizabeth-mathew-4063b5195/" target="_blank">View Profile</a></p>
-
-<p>...</p>
-
-Now, based on the given data, suggest the top 3 people to tag in the post using the format above.
-`;
-
-let realtags = await realTag(tagDecisionPrompt);
-console.log(`these are people we have to tag: ${realtags} `)
-
-} catch (error) {
-  console.log('error in the scrape')
-}
      
 console.log(data)
 let bangerPrompt = ` Your an smart and professional linkedin post writer who writes a banger for an idea for a linkedin post ,you have to only return the banger hook nothing else or your message only banger
@@ -319,6 +256,44 @@ Your max allowed to use 3 emojis until they asked in the styles for more emojis
 Now, assemble the pieces into a beautifully formatted LinkedIn post in HTML.
 `;
 
+const tagDecisionPrompt = `
+You are an expert LinkedIn engagement assistant. Based on the following Brave search results, your job is to analyze and recommend the **best 3 LinkedIn profiles to tag** in a post to maximize relevance and engagement.
+
+🧠 **Selection Criteria:**
+- Person should be related to **DevRel / Developer Relations / Developer Advocacy**
+- Should have a connection to **Google** or past DevRel work at Google
+- Prefer those located in **India** or similar regions
+- Avoid celebrities or VPs (e.g., Sundar Pichai)
+- Prefer those who are **active on LinkedIn** or have strong recent presence
+- Prioritize **diversity** and relevance in the 3 suggestions
+
+📄 **Data (Each Object = Search Result):**
+${JSON.stringify(linkedInResults, null, 2)}
+
+📌 **Instructions:**
+- Output must be in **pure HTML** — no markdown or plain text
+- Use <p> to separate each person
+- Use <strong> to highlight names and titles
+- Mention people using @FullName where full name is available
+- Embed profile link using an anchor tag like:
+  <a href="https://..." target="_blank">View Profile</a>
+- Do **not** return explanations outside the 3 choices
+- No extra HTML wrappers like <html> or <body>
+
+✍️ **Your Output Format Example:**
+
+<p><strong>1. @Elizabeth Mathew – DevRel Engineer at SigNoz</strong><br>
+Selected for active DevRel work, internship at Google, and strong India presence.<br>
+<a href="https://www.linkedin.com/in/elizabeth-mathew-4063b5195/" target="_blank">View Profile</a></p>
+
+<p>...</p>
+
+Now, based on the given data, suggest the top 3 people to tag in the post using the format above.
+`;
+
+let realtags = await realTag(tagDecisionPrompt);
+console.log(`these are people we have to tag: ${realtags} `)
+
 
 
 
@@ -332,6 +307,9 @@ res.json({
   final:final,
   tags:realtags
 })
+  } catch (error) {
+    console.log(error)
+  }
 
 
 })
