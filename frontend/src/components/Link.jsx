@@ -246,7 +246,7 @@ const Link = () => {
           type="submit"
           className="bg-linear-to-r tech  group shadow-[0_0_15px_rgba(255,165,0,0.4)] hover:shadow-[0_0_30px_rgba(255,165,0,0.6)] transition-shadow  from-orange-500 to-yellow-400 font-semibold hover:cursor-pointer text-black p-4 rounded-xl sm:w-[45%] text-xl  my-8"
         >
-          Connect With AI{" "}
+         Deploy Agents
           
           <span>
             <FaArrowRight className="inline ml-4 group-hover:translate-x-1" />
