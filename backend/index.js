@@ -161,11 +161,12 @@ site:linkedin.com/in <role> <company/keyword> <location>
 
  const browser = await puppeteer.launch({
   headless:true,
+  executablePath: '/usr/bin/chromium',
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
  });
   const page = await browser.newPage();
    let encodedcomp = encodeURIComponent(tags)
-let googleSearch = `https://search.brave.com/search?q=${encodedcomp}`
+let googleSearch= `https://search.brave.com/search?q=${encodedcomp}`
   await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
 
 const linkedInResults = await page.$$eval('div.snippet', (elements) => {
