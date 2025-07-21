@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+        "postinstall":"npx puppeteer browsers install chrome"
   },
   "dependencies": {
     "@google/genai": "^1.10.0",
@@ -19,7 +20,7 @@
     "marked": "^16.1.1",
     "puppeteer": "^24.14.0",
     "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "postinstall":"npx puppeteer browsers install chrome"
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+
   }
 }
