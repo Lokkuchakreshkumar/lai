@@ -158,7 +158,8 @@ site:linkedin.com/in <role> <company/keyword> <location>
  console.log(`These are tags:${tags}`)
 
  const browser = await puppeteer.launch({
-  headless:true
+  headless:true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
  });
   const page = await browser.newPage();
    let encodedcomp = encodeURIComponent(tags)
