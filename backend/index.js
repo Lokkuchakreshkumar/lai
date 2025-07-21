@@ -4,7 +4,8 @@ import { GoogleGenAI } from "@google/genai";
 const app = express();
 
 import dotenv from "dotenv"
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth"
 
 dotenv.config()
 
@@ -23,7 +24,7 @@ const ai_realtag = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY4});
 const groundingTool = {
   googleSearch: {},
 };
-
+puppeteer.use(StealthPlugin());
 
 const config = {
   tools: [groundingTool],
