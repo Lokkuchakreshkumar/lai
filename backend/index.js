@@ -158,7 +158,8 @@ site:linkedin.com/in <role> <company/keyword> <location>
  let tags = await Tag(tagPrompt)
  console.log(`These are tags:${tags}`)
 
- const browser = await puppeteer.launch({
+try {
+   const browser = await puppeteer.launch({
   headless:true,
   executablePath:actualPup.executablePath,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -181,6 +182,9 @@ const linkedInResults = await page.$$eval('div.snippet', (elements) => {
   }) 
 });
 
+} catch (error) {
+  console.log('error in the scrape')
+}
      
 console.log(data)
 let bangerPrompt = ` Your an smart and professional linkedin post writer who writes a banger for an idea for a linkedin post ,you have to only return the banger hook nothing else or your message only banger
