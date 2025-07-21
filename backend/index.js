@@ -2,9 +2,9 @@ import express from "express"
 import cors from "cors"
 import { GoogleGenAI } from "@google/genai";
 const app = express();
-import actualPup from "puppeteer"
+
 import dotenv from "dotenv"
-import puppeteer from "puppeteer-extra";
+import puppeteer from "puppeteer";
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 dotenv.config()
 
