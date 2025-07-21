@@ -206,30 +206,41 @@ style/styles:${styles}
  the idea is : ${data.input}`
  let hook = await Banger(bangerPrompt)
  console.log(hook)
- let BodyPrompt = `Your an smart and professional linkedin post writer who concentrates on writing body of the linkedin post not anything else in an interesting manner and return one to two paragraphs that is it ,nothing extra no messages from yourself
- Tell a Story, Not a Sales Pitch 📖
-People connect with narratives.
+ let BodyPrompt = `
+You are an intelligent and professional LinkedIn content writer agent. Your only job is to generate the **body section** of a LinkedIn post.
 
+❗️DO NOT include:
+- Hooks
+- Hashtags
+- Call-to-action (CTA)
+- Lessons learned or takeaways
+- Code snippets (unless explicitly mentioned in the prompt)
 
-Share a quick anecdote: “Yesterday, my CI/CD pipeline blew up at 2 AM…”
+---
 
-Tie the drama back to what you learned or how you solved it.
-Give Actionable Value 💡
-Share tips, snippets, or tools you use.
-this is the attention line or hook bang written continue from here and apt to it ,this is the hook:${hook}
-Example for a developer:
+📌 Your sole focus is to expand on the given **hook** in an engaging and reader-friendly way, matching the selected style.
 
-“Here’s a 3‑line snippet to debounce your React input without extra libraries…”
+📣 Hook:
+"${hook}"
 
-Value = saves people time, so they’ll like/share/bookmark.
- Keep It Scannable ✂️
-Short paragraphs (2–3 lines max).
+🎨 Style: ${styles}
 
-Bullet points or emojis to break up text.
+🧠 Topic/Prompt: ${data.input}
 
-White space over walls of text—your reader’s thumb will thank you.
-style/styles:${styles}
- the topic/idea/prompt : ${data.input}`
+---
+
+✍️ **Guidelines**:
+- Tell a short story or scenario that aligns with the hook (no moral or lessons).
+- Make it scroll-stopping and interesting — something that feels real, not robotic.
+- Format it based on the style:
+  - Use emojis if the style is casual or happy.
+  - Use short paragraphs, bullets, or whitespace if the style is clean/formal.
+  - Write with emotion or humor if the style allows.
+- DO NOT exceed your role. You are not here to teach, preach, or sell. You're just here to **continue the narrative** in a compelling way.
+
+Only return the body text. Nothing else. No notes, no explanations. Write it like it's meant to go live on LinkedIn.
+`;
+
  let Bodyhook = await Body(BodyPrompt)
   console.log(Bodyhook)
  let LearnPrompt = `Your an smart and professional linkedin post writer you only write what you have learned from the experience nothing else you have to just return what you have learned and no messages from you,you should not put hashtags
@@ -275,7 +286,7 @@ You are a professional LinkedIn post formatter AI. Your job is to assemble the p
 - **Call to Action**: ${ctaHook}
 - **Hash Tags**: ${Hashed}
 IF TEH SAME INFO WHICH IS IN MAIN BODY WAS REPEATED IN LEARNING INTELLIGENTLY CUT THE INFO OR MAKE NEW INFO(INTELLIGENTLY)
-MAKE THE POST SIZE IN SHORT-MEDIUM UNTIL USER SELECTS LONG HIMSELF
+MAKE THE POST SIZE IN SHORT-MEDIUM(less medium) UNTIL USER SELECTS LONG or SHORT HIMSELF 
 MAKE SURE YOU DON'T REPEAT INFO AGAIN AND AGAIN,IF THERE IS TAILOR THE INFO BEAUTIFULLY STRUCTURED WAY.
 DO NOT ,DO NOT REPEAT THE CONTENT=>VERY VERY VERY IMPORTANT ONCE DISCUSSED IT IS DISCUSSED
 **Tone & Style Guide:**
