@@ -5,7 +5,7 @@ const app = express();
 
 import dotenv from "dotenv"
 import puppeteer from "puppeteer";
-import StealthPlugin from "puppeteer-extra-plugin-stealth"
+
 dotenv.config()
 
 app.use(cors())
@@ -23,7 +23,7 @@ const ai_realtag = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY4});
 const groundingTool = {
   googleSearch: {},
 };
-puppeteer.use(StealthPlugin())
+
 
 const config = {
   tools: [groundingTool],
