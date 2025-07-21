@@ -7,7 +7,12 @@ import dotenv from "dotenv"
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 dotenv.config()
-const ai_bang = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY7});
+
+app.use(cors())
+app.use(express.json())
+app.post('/scrape',async(req,res)=>{
+ try {
+   const ai_bang = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY7});
 const ai_body = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY2});
 const ai_learn = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY3});
 const ai_cta = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY4});
@@ -95,12 +100,7 @@ async function realTag(prompt) {
   return response.text;
 }
 
-app.use(cors())
-app.use(express.json())
-app.post('/scrape',async(req,res)=>{
-  
-  try {
-      let data = req.body.input
+    let data = req.body.input
 
     let styles = []
 if(data.formal){
@@ -159,6 +159,28 @@ site:linkedin.com/in <role> <company/keyword> <location>
  let tags = await Tag(tagPrompt)
  console.log(`These are tags:${tags}`)
 
+ const browser = await puppeteer.launch({
+  headless:true,
+  executablePath:actualPup.executablePath,
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+ });
+  const page = await browser.newPage();
+   let encodedcomp = encodeURIComponent(tags)
+let googleSearch = `https://search.brave.com/search?q=${encodedcomp}`
+  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+
+const linkedInResults = await page.$$eval('div.snippet', (elements) => {
+  return elements.map((e) => {
+    const aTag = e.querySelector('a').href;
+    const title = e.querySelector('.title')?.innerText || '';
+    const description = e.querySelector('.snippet-description')?.innerText || '';
+
+    return {title:title,
+      link:aTag,
+      description:description
+    }
+  }) 
+});
 
      
 console.log(data)
@@ -307,9 +329,9 @@ res.json({
   final:final,
   tags:realtags
 })
-  } catch (error) {
-    console.log(error)
-  }
+ } catch (error) {
+  console.log(error)
+ }
 
 
 })
