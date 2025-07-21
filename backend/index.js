@@ -237,7 +237,7 @@ ${data.input}
 ✅ **What You MUST Do**:
 - Continue the narrative in a natural, conversational way
 - Match the **tone, formatting, and length** to the selected style
-- Use **short paragraphs**, whitespace, and bullet points (if it fits the tone) for readability
+- Use **short paragraphs**, whitespace, and **bullet points** (if it fits the tone) for readability
 - Make the post feel like it was written by a human who actually uses LinkedIn
 - Show a believable moment, mini-story, personal POV, or relatable insight that reflects the hook
 - Use **emojis only** if the selected style supports it (e.g., casual, happy, emoji-rich)
@@ -276,6 +276,8 @@ You are ONLY responsible for the **body text**, written in the selected style, a
  let LearnPrompt = `Your an smart and professional linkedin post writer you only write what you have learned from the experience nothing else you have to just return what you have learned and no messages from you,you should not put hashtags
  this is the attention line or hook bang written ,this is the hook:${hook}
  this is the body or the main part of the post ,continue from here with your assigned role with the style and without repetition,the body:${Bodyhook}
+
+ **Make it defaulty short paragraph or bullet points depending on situation**
  style/styles:${styles}
  the topic/idea/prompt : ${data.input}
  `
