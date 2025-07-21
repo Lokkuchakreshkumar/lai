@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { GoogleGenAI } from "@google/genai";
 const app = express();
+import actualPup from "puppeteer"
 import dotenv from "dotenv"
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
@@ -159,6 +160,7 @@ site:linkedin.com/in <role> <company/keyword> <location>
 
  const browser = await puppeteer.launch({
   headless:true,
+  executablePath:actualPup.executablePath,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
  });
   const page = await browser.newPage();
