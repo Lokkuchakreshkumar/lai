@@ -2,5 +2,10 @@ services:
   - type: web
     name: backend
     env: node
-    buildCommand: ./render-build.sh && npm install
+    # Create the cache directory before installing dependencies
+    buildCommand: mkdir -p /opt/render/.cache/puppeteer_local && ./render-build.sh && npm install
     startCommand: npm start
+    envVars:
+      - key: PUPPETEER_CACHE_DIR
+        # Tell puppeteer to use this explicit path
+        value: /opt/render/.cache/puppeteer_local
