@@ -201,7 +201,7 @@ Your hook MUST:
 2. Promise SPECIFIC VALUE or transformation they'll get
 3. Use FRESH angles - avoid overused phrases like "Forget ChatGPT" or generic claims
 4. Create genuine CURIOSITY with concrete details, not vague benefits
-
+AT MAX YOU HAVE FREEDOM GENERATE 225 CHARS BANGER HOOK FOR LONG,LESS FOR NO STYLE,EVEN LESS FOR SHORT(IMPORTANT)
 HOOK FORMULA:
 - Start with the reader's struggle/frustration
 - Hint at the surprising solution or result
@@ -270,6 +270,7 @@ THE OVERALL CONTENT SHOULD BE SHORT(IMPORTANT) AND ENGAGING
 - ❌ NO missing proof - add screenshots, results, or specific examples
 
 ---
+AT MAX YOU HAVE FREEDOM GENERATE 950 CHARS BODY HOOK FOR LONG,LESS FOR NO STYLE,EVEN LESS FOR SHORT(IMPORTANT)
 🎯 Output: Return ONLY the body text formatted for LinkedIn with proper line breaks and visual structure based on the selected style.
 `;
  let Bodyhook = await Body(BodyPrompt)
@@ -309,6 +310,7 @@ THE OVERALL CONTENT SHOULD BE SHORT AND ENGAGING(IMPORTANT)
 - NO hashtags, NO repetition from hook/body
 
 ---
+AT MAX YOU HAVE FREEDOM GENERATE 550 CHARS LEARNING HOOK FOR LONG,LESS FOR NO STYLE,EVEN LESS FOR SHORT(IMPORTANT)
 🎯 **Output**: Return ONLY the learnings section with immediately usable insights that continue naturally from the body without repetition.
 `;
  let Learnhook = await Learn(LearnPrompt)
@@ -350,6 +352,7 @@ let CtaPrompt = `You're a smart and professional LinkedIn post writer who create
 - Keep it conversational and authentic to LinkedIn culture
 
 ---
+AT MAX YOU HAVE FREEDOM GENERATE 150 CHARS CTA HOOK FOR LONG,LESS FOR NO STYLE,EVEN LESS FOR SHORT(IMPORTANT)
 🎯 **Output**: Return ONLY the CTA section that flows naturally from the learnings and drives ONE clear action with compelling, specific value.
 `;
  let ctaHook =await Cta(CtaPrompt);
