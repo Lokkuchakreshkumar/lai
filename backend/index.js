@@ -432,6 +432,8 @@ Generate an authentic, concise LinkedIn post in a human tone: start with a hook,
 DON NOT USE LONG HASHES (-) OR (--),USE OCCASIONAL EMOJIS TO ENSURE AND TO SHOW REAL HUMAN
 THE OVERALL CONTENT SHOULD BE SHORT AND AND ENGAGING(IMPORTANT:IF YOU FEEL IT IS LENGTHY EXPLICITLY CUT THE POST IN SUCH A WAY THAT IT IS STILL ENGAGING )
 Your max allowed to use 3 emojis until they asked in the styles for more emojis
+
+AT ANY COST THE TOTAL POST CHARS SHOULD NOT EXCEED 2750(EVEN FOR LONG),FOR NORMAL DO NOT EVEN COME TO CLOSER,FOR SHORTER EVEN MORE LESS
 Now, assemble the pieces into a beautifully formatted LinkedIn post in HTML.
 `;
 
