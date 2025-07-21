@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import "tailwindcss";
+.bc{
+    background-image: radial-gradient(ellipse at center,#0F1935 20%,#08090c 95%);
+}
+.mull{
+      font-family: "Mulish", sans-serif;
+
+}
+.tech{
+      font-family: "Space Grotesk", sans-serif;
+}
+/* Enable and style the scrollbar */
+/* SCROLLBAR BASE */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* TRACK (the background) */
+::-webkit-scrollbar-track {
+  background: #0F1935; /* same as your .bc bg */
+}
+
+/* THUMB (the handle) */
+::-webkit-scrollbar-thumb {
+  background: #ff9900b3; /* orange glowish thumb */
+  border-radius: 10px;
+  border: 2px solid #0F1935; /* blends with background */
+}
+
+/* ON HOVER */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9900;
+}
+br {
+  line-height: 0.4;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+p{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+}
+a{
+  padding:0.5rem;
+  margin-top: 1rem;
+  display: inline-block;
+  border:1px solid orange;
+  border-radius: 0.4rem;
+  color: white;
+}
+a:hover{
+    border:1px solid rgb(226, 173, 74);
+    box-shadow: 0px 0px 8px 1px rgb(91, 59, 1);
+    color: orange;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50% }
+  100% { background-position: 100% 50% }
+}
+.gradient-border {
+  animation: gradient-move 3s linear infinite;
+  background-size: 200% 200%;
+  background-image: linear-gradient(to right, #014ac8, #00cfff, #00ffd5);
+}
