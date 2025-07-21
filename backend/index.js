@@ -133,6 +133,7 @@ if(data.emoji){
      styles.push(style7)
 }
 console.log(styles)
+
 let tagPrompt = `
 You are an expert assistant designed to help users increase engagement on their LinkedIn posts by tagging relevant professionals.
 
@@ -190,7 +191,7 @@ const linkedInResults = await page.$$eval('div.snippet', (elements) => {
   }) 
 });
 
-     
+     console.log(`came from puppeteer:${linkedInResults}`)
 console.log(data)
 let bangerPrompt = ` Your an smart and professional linkedin post writer who writes a banger for an idea for a linkedin post ,you have to only return the banger hook nothing else or your message only banger
 First line matters—make it punchy.
