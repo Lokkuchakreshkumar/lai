@@ -161,7 +161,6 @@ site:linkedin.com/in <role> <company/keyword> <location>
 
  const browser = await puppeteer.launch({
     headless: true,
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
   args: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
@@ -331,7 +330,11 @@ console.log(`these are people we have to tag: ${realtags} `)
 
 
 let final = await wrap(wrapperPrompt)
-console.log(`this is final:\n\n\n\n${final}`)
+console.log(`this is final:
+
+
+
+${final}`)
 
 
 res.json({
