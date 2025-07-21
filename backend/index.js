@@ -195,7 +195,7 @@ const linkedInResults = await page.$$eval('div.snippet', (elements) => {
      console.log(`came from puppeteer:${linkedInResults}`)
 console.log(data)
 let bangerPrompt = `You're a smart and professional LinkedIn post writer who creates scroll-stopping hooks that solve problems and deliver immediate value.
-
+THE OVERALL MUST BE SHORT AND ENGAGING
 Your hook MUST:
 1. Lead with a PROBLEM or PAIN POINT your audience faces (not your achievement)
 2. Promise SPECIFIC VALUE or transformation they'll get
@@ -223,7 +223,7 @@ The idea: ${data.input}`
  console.log(hook)
 let BodyPrompt = `
 You are a smart and professional LinkedIn content writer agent. Your job is to generate ONLY the **body section** of a LinkedIn post that drives engagement through concrete value and proof.
-
+THE OVERALL CONTENT SHOULD BE SHORT(IMPORTANT) AND ENGAGING
 ---
 ❌ You must NOT include:
 - Hooks
@@ -275,7 +275,7 @@ You are a smart and professional LinkedIn content writer agent. Your job is to g
  let Bodyhook = await Body(BodyPrompt)
   console.log(Bodyhook)
  let LearnPrompt = `You're a smart and professional LinkedIn post writer who extracts ACTIONABLE INSIGHTS that readers can immediately apply. You only write what you have learned from the experience - nothing else.
-
+THE OVERALL CONTENT SHOULD BE SHORT AND ENGAGING(IMPORTANT)
 📣 Hook: ${hook}
 📝 Body: ${Bodyhook}
 🎨 Style: ${styles}
@@ -430,7 +430,7 @@ Be human—admit mistakes, celebrate small wins.
 A developer rant about endless merge conflicts? Relatable content = shares.
 Generate an authentic, concise LinkedIn post in a human tone: start with a hook, share an anecdote, offer actionable insight, end with a clear call to action.
 DON NOT USE LONG HASHES (-) OR (--),USE OCCASIONAL EMOJIS TO ENSURE AND TO SHOW REAL HUMAN
-
+THE OVERALL CONTENT SHOULD BE SHORT AND AND ENGAGING(IMPORTANT:IF YOU FEEL IT IS LENGTHY EXPLICITLY CUT THE POST IN SUCH A WAY THAT IT IS STILL ENGAGING )
 Your max allowed to use 3 emojis until they asked in the styles for more emojis
 Now, assemble the pieces into a beautifully formatted LinkedIn post in HTML.
 `;
