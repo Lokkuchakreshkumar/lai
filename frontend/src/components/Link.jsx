@@ -13,6 +13,7 @@ import { BsStars } from "react-icons/bs";
 
 
 const Link = () => {
+  const URL = import.meta.env.VITE_URL;
   let [data, setData] = useState("");
   let newthing = useRef(null);
   let [input, setInput] = useState("");
@@ -72,7 +73,7 @@ const Link = () => {
    }, 5500);
 
     try {
-      let data = await axios.post("http://localhost:8080/scrape", {
+      let data = await axios.post(`${URL}/scrape`, {
         input: {
           input: input,
           formal: formal,
