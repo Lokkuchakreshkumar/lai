@@ -216,7 +216,7 @@ Share a quick anecdote: “Yesterday, my CI/CD pipeline blew up at 2 AM…”
 Tie the drama back to what you learned or how you solved it.
 Give Actionable Value 💡
 Share tips, snippets, or tools you use.
-
+this is the attention line or hook bang written continue from here and apt to it ,this is the hook:${hook}
 Example for a developer:
 
 “Here’s a 3‑line snippet to debounce your React input without extra libraries…”
@@ -233,6 +233,8 @@ style/styles:${styles}
  let Bodyhook = await Body(BodyPrompt)
   console.log(Bodyhook)
  let LearnPrompt = `Your an smart and professional linkedin post writer you only write what you have learned from the experience nothing else you have to just return what you have learned and no messages from you,you should not put hashtags
+ this is the attention line or hook bang written ,this is the hook:${hook}
+ this is the body or the main part of the post ,continue from here with your assigned role with the style and without repetition,the body:${Bodyhook}
  style/styles:${styles}
  the topic/idea/prompt : ${data.input}
  `
@@ -241,13 +243,21 @@ style/styles:${styles}
 
  let CtaPrompt = `Your an smart and professional linkedin post writer you only write CTA in an engaging way and make invitations and you return that ,nothing else just the CTA AND INVITATIONS ,no messages from you,you should not put hashtags
  style/styles:${styles}
+  this is the attention line or hook bang written,this is the hook:${hook}
+ this is the body or the main part of the post ,the body:${Bodyhook}
+ this is the learning hook ,the learning hook:${Learnhook}
  the topic/idea/prompt : ${data.input}
  `
  let ctaHook =await Cta(CtaPrompt);
  
  let hashPrompt = `Your an smart and professional linkedin post writer you only write hashtags (4-5) that might get the highest engagement we can get and only return hashtags and do not return anything else
- 
-  the topic/idea/prompt : ${data.input}`
+  the topic/idea/prompt : ${data.input}
+ attention:${hook}
+ body:${Bodyhook}
+ learnings:${Learnhook}
+ Cta:${ctaHook}
+ continue from here to generate the best hashtags that will get the most engagement`
+  
  let Hashed = await Hash(hashPrompt)
 
     
