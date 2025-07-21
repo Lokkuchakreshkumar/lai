@@ -161,16 +161,22 @@ site:linkedin.com/in <role> <company/keyword> <location>
 
  const browser = await puppeteer.launch({
   headless: true,
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser',
   args: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
     '--disable-dev-shm-usage',
     '--disable-accelerated-2d-canvas',
+    '--disable-background-timer-throttling',
+    '--disable-backgrounding-occluded-windows',
+    '--disable-renderer-backgrounding',
+    '--disable-features=TranslateUI',
+    '--disable-ipc-flooding-protection',
     '--no-first-run',
     '--no-zygote',
-    '--single-process',
-    '--disable-gpu'
+    '--disable-gpu',
+    '--remote-debugging-port=9222',
+    '--disable-extensions'
   ],
  });
   const page = await browser.newPage();
