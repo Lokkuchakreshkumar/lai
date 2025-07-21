@@ -1,1 +1,11 @@
-./render-build.sh && npm install
+services:
+  - type: web
+    name: backend
+    env: node
+    buildCommand: ./render-build.sh && npm install && npx puppeteer browsers install chrome
+    startCommand: npm start
+    envVars:
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: true
+      - key: PUPPETEER_EXECUTABLE_PATH
+        value: /usr/bin/chromium
