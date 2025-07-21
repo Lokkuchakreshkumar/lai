@@ -424,7 +424,7 @@ DO NOT ,DO NOT REPEAT THE CONTENT=>VERY VERY VERY IMPORTANT ONCE DISCUSSED IT IS
 MAKE SURE THERE SHOULD BE NO WORDS LIKE THIS *GEMINI*,*HI* CONVERT THEM
 **Output Rules:**
 - Wrap each paragraph in a <p> tag.
-
+**DO NOT LIE ,IF THE INPUT DOES NOT HAVE THEY HAVE NOT TRAINED,YOU CANNOT PUT TRAINED,INSTEAD YOU THINK HOW I CAN MAKE IT ENGAGING.
 - Do not return Markdown or plain text. Output must be 100% valid HTML.
 - No extra comments, no explanations — return only the HTML content.
 IMPORTANT:
