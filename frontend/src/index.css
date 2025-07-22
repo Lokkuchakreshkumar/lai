@@ -5,7 +5,12 @@
 @import "tailwindcss";
 
 .bc{
-    background-image: radial-gradient(ellipse at center,#0F1935 20%,#08090c 95%);
+  
+    background-image: 
+    url('./assets/45-degree-fabric-dark.png'),
+    radial-gradient(ellipse at center,#0F1935 20%,#08090c 95%);
+ 
+ 
 }
 .mull{
       font-family: "Mulish", sans-serif;
@@ -71,4 +76,7 @@ a:hover{
 
 .mont{
     font-family: "Montserrat Alternates", sans-serif;
+}
+.sora{
+  
 }
