@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import { FaUserTie } from "react-icons/fa6";
@@ -10,12 +10,15 @@ import { BiSolidZap } from "react-icons/bi";
 import { MdContentCopy } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 
 const Link = () => {
   const URL = import.meta.env.VITE_URL;
   let [data, setData] = useState("");
+  let textarearef = useRef(null)
   let newthing = useRef(null);
+  let [height,setHeight] = useState(0)
   let [input, setInput] = useState("");
   let [formal, setFormal] = useState(false);
   let [support, setSupport] = useState(false);
@@ -24,7 +27,35 @@ const Link = () => {
   let [short, setShort] = useState(false);
   let [long, setLong] = useState(false);
   let [emoji, setEmoji] = useState(false);
+  useEffect(()=>{
+let textarea = textarearef.current
 
+   if (textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+  },[input])
+let enhanceClick = async() =>{
+  if(input == ""){
+    toast.error('write post idea',{duration:3000});
+    return;
+  }
+  toast.loading('Enhancing Prompt ',{id:'enhance',duration:Infinity});
+  let realPrompt = await axios.post('http://localhost:8080/enhance',{
+    input
+  })
+  let data = realPrompt.data;
+  setInput(data);
+  toast.success('Enhanced Prompt',{id:'enhance',duration:3000,removeDelay:3000})
+ setTimeout(() => {
+    const textarea = document.querySelector("textarea");
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + 1 + "px";
+    }
+  }, 0);
+
+}
   let handleClick = (event) => {
     console.log(event.target);
     if (event.target.id === "formal") {
@@ -50,8 +81,11 @@ const Link = () => {
     }
     
   };
-  let onchange = (event) => {
-    setInput(event.target.value);
+  let onchange = (e) => {
+    setInput(e.target.value);
+      e.target.style.height = 'auto';
+    e.target.style.height =( e.target.scrollHeight+1) + 'px';
+    setHeight(e.target.style.height)
   };
   let handleSubmit = async (event) => {
     event.preventDefault();
@@ -107,19 +141,25 @@ const Link = () => {
         onSubmit={handleSubmit}
         className="w-full  flex flex-col items-center justify-center"
       >
-    <div className=" relative bg-linear-to-r from-[#014ac8] to-cyan-500 rounded-lg p-[1.2px] flex items-center justify center w-full sm:w-[55%] ">
-        <textarea
+    <div className={`relative bg-linear-to-r from-[#014ac8]  to-cyan-500 rounded-xl p-[1.2px]  w-full sm:w-[55%] `}>
+       
+      <div className="flex flex-col space-y-4 p-4 border  rounded-xl bg-black w-full ">
+     
+           <textarea
           type="text"
           spellCheck={false}
           onChange={onchange}
+          ref={textarearef}
           value={input}
-          onInput={(e) => {
-    e.target.style.height = 'auto';
-    e.target.style.height = e.target.scrollHeight + 'px';
-  }}
+
           placeholder="Your Post here,If you need specific styles write it down here"
-          className=" flex placeholder:text-white/50   overflow-y-hidden resize-none text-white text-lg placeholder:text-lg px-4   placeholder:text-center border outline-none    w-full bg-black rounded-lg py-4 "
+          className=" flex flex-col placeholder:text-white/50   border-none   overflow-y-hidden resize-none text-white text-lg placeholder:text-lg p-8   placeholder:text-center border outline-none    w-full bg-black rounded-lg  "
         />
+      
+
+        <div onClick={enhanceClick} className={` w-[45%] border  hover:cursor-pointer bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
+ backdrop-blur-3xl sora font-semibold hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] rounded-lg sm:w-[13rem] font-semibold   mb-2 text-black px-4 py-3 bg`}><span className="shadow-amber-500"><FaWandMagicSparkles className="text-[#FFD700] drop-shadow-[0_0_8px_#facc15] text-lg inline mr-1"/></span> Enhance Prompt</div>
+      </div>
         </div>
         <div className="flex items-center justify-center flex-wrap w-[60%] mt-4 gap-4">
           <div>

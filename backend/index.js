@@ -21,6 +21,8 @@ const ai_wrap = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY5});
 const ai_hash = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY6});
 const ai_tag = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY7});
 const ai_realtag = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY4});
+
+
 const groundingTool = {
   googleSearch: {},
 };
@@ -73,12 +75,12 @@ async function Hash(prompt) {
   });
   return response.text;
 }
-async function Tag(prompt) {
+async function Tag() {
   const fullPrompt = `
 You are a LinkedIn tagging assistant with access to Google Search. When asked to find relevant people, always use your tools (search if needed) before responding.
 
 TASK:
-${prompt}
+${data.input}
 
 (Use Google Search to assist your response. Return only what's asked — no extra messages.)
   `;
@@ -225,6 +227,8 @@ let BodyPrompt = `
 You are a smart and professional LinkedIn content writer agent. Your job is to generate ONLY the **body section** of a LinkedIn post that drives engagement through concrete value and proof.
 THE OVERALL CONTENT SHOULD BE SHORT(IMPORTANT) AND ENGAGING
 ---
+
+YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:WE TRAINED ON 50000 POSTS DATA ---> THIS IS VERY WRONG YOU CANNOT CLAIM LIKE THAT
 ❌ You must NOT include:
 - Hooks
 - Hashtags  
@@ -437,7 +441,7 @@ A developer rant about endless merge conflicts? Relatable content = shares.
 Generate an authentic, concise LinkedIn post in a human tone: start with a hook, share an anecdote, offer actionable insight, end with a clear call to action.
 DON NOT USE LONG HASHES (-) OR (--),USE OCCASIONAL EMOJIS TO ENSURE AND TO SHOW REAL HUMAN
 THE OVERALL CONTENT SHOULD BE SHORT AND AND ENGAGING(IMPORTANT:IF YOU FEEL IT IS LENGTHY EXPLICITLY CUT THE POST IN SUCH A WAY THAT IT IS STILL ENGAGING )
-Your max allowed to use 3 emojis until they asked in the styles for more emojis
+Your max allowed to use 3 emojis until they asked in the  for more emojis in ${styles.join(", ")}
 
 AT ANY COST THE TOTAL POST CHARS SHOULD NOT EXCEED 2750(EVEN FOR LONG),FOR NORMAL DO NOT EVEN COME TO CLOSER,FOR SHORTER EVEN MORE LESS
 Now, assemble the pieces into a beautifully formatted LinkedIn post in HTML.
@@ -505,6 +509,58 @@ res.json({
 
 
 })
+app.post('/enhance',async (req,res)=>{
+  let userPrompt = req.body.input;
+  console.log(userPrompt)
+  
+  const ai_prompt = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY1});
+let enhance_prompt = `
+You're a professional AI prompt enhancer working inside a multi-agent system for generating engaging LinkedIn posts. Your job is to take a rough user idea and enhance it so that an AI can:
+- Fully understand the intent,
+- Deliver specific, useful, and engaging content,
+- Stay within strict boundaries of role-based agents.
+
+🧠 SYSTEM CONTEXT (do NOT include this in output):
+- Other AI agents will handle Hook, Body, Learnings, CTA, Hashtags, and Tagging.
+- Your output will be used as the **core input idea** for those agents.
+- Your job is NOT to generate content, only to enhance the user's **idea/prompt**.
+
+❌ DO NOT include:
+- Hashtags
+- Call-to-actions
+- Quotes
+- Filler introductions or marketing fluff
+- Code or technical terms unless user explicitly mentions them
+- Any messages or instructions to the user
+
+✅ WHAT TO DO:
+- **Preserve every functional and structural element** in the user’s input — nothing should be lost or skipped.
+- **Clarify and elevate** any vague or incomplete thought without removing meaning.
+- **Refine the tone** to feel more emotionally compelling, confident, and clear.
+- If the user implies complexity (like workflows, features, or mechanisms), keep it intact and enhance readability.
+- Do not invent or exaggerate features. Only improve what's actually present.
+- Avoid buzzwords. Focus on clarity, purpose, and the user’s authentic idea.
+- Keep it crisp — well-structured but not overly formal.
+
+🔁 USER INPUT (Enhance this only):
+"${userPrompt}"
+
+🎯 OUTPUT:
+Return a refined, emotionally compelling, and **fully detailed** version of the above input, ready for further AI processing. No extra notes. Just return the enhanced prompt.
+`;
+
+  async function Enhance(prompt) {
+  const response = await ai_prompt.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
+   return response.text
+}
+let enhancedPrompt = await Enhance(enhance_prompt);
+res.send(enhancedPrompt)
+
+})
+
 app.listen('8080',()=>{
     console.log('listening')
 })
