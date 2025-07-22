@@ -41,7 +41,7 @@ let enhanceClick = async() =>{
     return;
   }
   toast.loading('Enhancing Prompt ',{id:'enhance',duration:Infinity});
-  let realPrompt = await axios.post('http://localhost:8080/enhance',{
+  let realPrompt = await axios.post(`${URL}/enhance`,{
     input
   })
   let data = realPrompt.data;
