@@ -157,8 +157,8 @@ let enhanceClick = async() =>{
         />
       
 
-        <div onClick={enhanceClick} className={` w-[55%] border  hover:cursor-pointer bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
- backdrop-blur-3xl sora font-bold hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] rounded-lg sm:w-[13rem]    mb-2 text-black px-4 py-3 bg`}><span className="shadow-amber-500"><FaWandMagicSparkles className="text-[#FFD700] drop-shadow-[0_0_8px_#facc15] text-lg inline mr-1"/></span> Enhance Prompt</div>
+        <div onClick={enhanceClick} className={` w-[59%] border  hover:cursor-pointer bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
+ backdrop-blur-3xl sora font-bold hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] rounded-lg sm:w-[13rem]    mb-2 text-black text-center py-3 bg`}><span className="shadow-amber-500"><FaWandMagicSparkles className="text-[#FFD700] drop-shadow-[0_0_8px_#facc15] text-lg inline mr-1"/></span> Enhance Prompt</div>
       </div>
         </div>
         <div className="flex items-center justify-center flex-wrap w-[60%] mt-4 gap-4">
