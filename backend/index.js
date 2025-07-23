@@ -183,7 +183,7 @@ let googleSearch= `https://search.brave.com/search?q=${encodedcomp}`
 
 const linkedInResults = await page.$$eval('div.snippet', (elements) => {
   return elements.map((e) => {
-    const aTag = e.querySelector('a').href || "failed to extract";
+    const aTag = e.querySelector('a')?.href || "failed to extract";
     const title = e.querySelector('.title')?.innerText || '';
     const description = e.querySelector('.snippet-description')?.innerText || '';
 
