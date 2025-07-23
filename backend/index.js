@@ -138,25 +138,42 @@ if(data.emoji){
 console.log(styles)
 
 let tagPrompt = `
-You are an expert assistant designed to help users increase engagement on their LinkedIn posts by tagging relevant professionals.
+You are a tagging assistant designed for LinkedIn post enhancement.
 
-🎯 Your task is to generate **one Google-style search query** that helps find **a real LinkedIn profile** suitable for tagging in the post below.
+🧠 Your ONLY job is to generate a single **Google-style search query** that helps find a **real LinkedIn profile** relevant to the post below.
 
-📄 Post content:
+🚫 You MUST NOT explain anything.
+🚫 You MUST NOT include names, markdown, lists, or extra text.
+🚫 You MUST NOT include famous people or executives (no Sundar Pichai, Larry Page, etc.).
+
+---
+
+🎯 Post content:
 "${data.input}"
 
-📌 Target profile to find:
-- NOT a celebrity or executive (no Sundar, no VPs)
-- Should be an **engineer**, **Developer Advocate**, **Product Builder**, or someone related to the post's domain
-- Preferably from **India** (or a nearby region)
-- Must be **active** on LinkedIn (posts regularly or recently)
+---
 
-📌 Search format:
-Return **only** one line in this format:
-site:linkedin.com/in <role> <company/keyword> <location>
+📌 Your query must:
+- Be a **single line only**
+- Start with exactly: site:linkedin.com/in
+- Include a relevant **role or job title** based on the post
+- Include a **company name** or **relevant keyword** from the post
+- End with: **India**
 
-⚠️ Do NOT reuse or imitate any examples. Your query MUST be generated from the actual post above.
-⚠️ Do NOT add explanations or extra text — just the search query.
+---
+
+✅ Correct format (only this is allowed):
+
+site:linkedin.com/in <job title> <company or keyword> india
+
+❌ Do NOT return anything other than the query
+❌ Do NOT write bios, summaries, lists, or names
+❌ Do NOT wrap the output in markdown or symbols
+❌ Do NOT mention anyone famous or executive-level
+
+---
+
+🔁 Final reminder: Return only one **plain text line** in the format above. Nothing else.
 `;
 
 
