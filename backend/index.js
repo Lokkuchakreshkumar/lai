@@ -193,8 +193,10 @@ const linkedInResults = await page.$$eval('div.snippet', (elements) => {
     }
   }) 
 });
+console.log('Type of linkedInResults:', typeof linkedInResults);
+console.log('Is it an Array?', Array.isArray(linkedInResults));
 
-     console.log(`came from puppeteer:${linkedInResults}`)
+     console.log(`came from puppeteer:${JSON.stringify(linkedInResults)}`)
 console.log(data)
 let bangerPrompt = `You're a smart and professional LinkedIn post writer who creates scroll-stopping hooks that solve problems and deliver immediate value.
 THE OVERALL MUST BE SHORT AND ENGAGING
