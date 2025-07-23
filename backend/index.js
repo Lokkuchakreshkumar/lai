@@ -75,15 +75,8 @@ async function Hash(prompt) {
   });
   return response.text;
 }
-async function Tag() {
-  const fullPrompt = `
-You are a LinkedIn tagging assistant with access to Google Search. When asked to find relevant people, always use your tools (search if needed) before responding.
-
-TASK:
-${data.input}
-
-(Use Google Search to assist your response. Return only what's asked — no extra messages.)
-  `;
+async function Tag(prompt) {
+ 
 
   const response = await ai_tag.models.generateContent({
     model: "gemini-2.5-flash", 
@@ -151,7 +144,7 @@ Your ONLY job is to generate one single **Google-style search query** to find a 
 "${data.input}"
 
 ✅ Output Format:
-site:linkedin.com/in <role> <company or topic> india
+site:linkedin.com/in <role> <company or topic> india  -->Strictly
 
 ⚠️ Do NOT include:
 - Names of people (Sundar, Larry, etc.)
