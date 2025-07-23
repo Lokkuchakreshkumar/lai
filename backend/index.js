@@ -80,7 +80,7 @@ async function Tag(prompt) {
 
   const response = await ai_tag.models.generateContent({
     model: "gemini-2.5-flash", 
-   content:prompt,
+   contents:prompt,
     config, 
   });
 
