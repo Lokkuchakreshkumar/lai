@@ -138,43 +138,33 @@ if(data.emoji){
 console.log(styles)
 
 let tagPrompt = `
-You are a tagging assistant designed for LinkedIn post enhancement.
+You are a tagging assistant for LinkedIn posts.
 
-🧠 Your ONLY job is to generate a single **Google-style search query** that helps find a **real LinkedIn profile** relevant to the post below.
+Your ONLY job is to generate one single **Google-style search query** to find a LinkedIn profile relevant to the given post.
 
-🚫 You MUST NOT explain anything.
-🚫 You MUST NOT include names, markdown, lists, or extra text.
-🚫 You MUST NOT include famous people or executives (no Sundar Pichai, Larry Page, etc.).
+🎯 Instructions:
+- ONLY return a search query.
+- NO explanations, NO famous people, NO bios.
+- Return ONLY one line, in plain text, with no formatting.
 
----
-
-🎯 Post content:
+🧩 Given Post:
 "${data.input}"
 
----
+✅ Output Format:
+site:linkedin.com/in <role> <company or topic> india
 
-📌 Your query must:
-- Be a **single line only**
-- Start with exactly: site:linkedin.com/in
-- Include a relevant **role or job title** based on the post
-- Include a **company name** or **relevant keyword** from the post
-- End with: **India**
+⚠️ Do NOT include:
+- Names of people (Sundar, Larry, etc.)
+- Bullet points or markdown
+- Titles like CEO, VP, CFO, or any executives
+- Extra commentary or sentences
 
----
+✅ Example (for internal understanding only — don’t copy this):
+site:linkedin.com/in software engineer google india
 
-✅ Correct format (only this is allowed):
-
-site:linkedin.com/in <job title> <company or keyword> india
-
-❌ Do NOT return anything other than the query
-❌ Do NOT write bios, summaries, lists, or names
-❌ Do NOT wrap the output in markdown or symbols
-❌ Do NOT mention anyone famous or executive-level
-
----
-
-🔁 Final reminder: Return only one **plain text line** in the format above. Nothing else.
+Final Reminder: Return ONLY the query, in one plain text line. No extras.
 `;
+
 
 
  let tags = await Tag(tagPrompt)
