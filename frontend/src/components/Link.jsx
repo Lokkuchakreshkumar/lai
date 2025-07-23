@@ -11,6 +11,7 @@ import { MdContentCopy } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { FaWandMagicSparkles } from "react-icons/fa6";
+import { BsGraphUpArrow } from "react-icons/bs";
 
 
 const Link = () => {
@@ -55,6 +56,12 @@ let enhanceClick = async() =>{
     }
   }, 0);
 
+}
+let handleTech = async() =>{
+  toast.loading('Looking into Websites',{id:'tech'})
+  let data = await axios.post('http://localhost:8080/Tech')
+  let res = data.data;
+  console.log(res)
 }
   let handleClick = (event) => {
     console.log(event.target);
@@ -143,7 +150,7 @@ let enhanceClick = async() =>{
       >
     <div className={`relative bg-linear-to-r from-[#014ac8]  to-cyan-500 rounded-xl p-[1.2px]  w-full sm:w-[55%] `}>
        
-      <div className="flex flex-col space-y-4 p-4 border  rounded-xl bg-black w-full ">
+      <div className="flex items-center flex-wrap space-x-4 space-y-4 p-4 border  rounded-xl bg-black w-full ">
      
            <textarea
           type="text"
@@ -159,6 +166,8 @@ let enhanceClick = async() =>{
 
         <div onClick={enhanceClick} className={` w-[59%] border  hover:cursor-pointer bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500
  backdrop-blur-3xl sora font-bold hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] rounded-lg sm:w-[13rem]    mb-2 text-black text-center py-3 bg`}><span className="shadow-amber-500"><FaWandMagicSparkles className="text-[#FFD700] drop-shadow-[0_0_8px_#facc15] text-lg inline mr-1"/></span> Enhance Prompt</div>
+  <div onClick={handleTech} className={` w-[59%] shadow-inner shadow-slate-800  hover:cursor-pointer bg-[#0F172A]  text-white border border-[#1E293B] 
+ backdrop-blur-3xl sora font-bold hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] rounded-lg sm:w-[13rem]    mb-2  text-center py-3 bg`}><span className="shadow-amber-500"><BsGraphUpArrow className="text-cyan-500 drop-shadow-[0_0_8px_cyan] text-lg inline mr-1"/></span> Write from Latest tech</div>
       </div>
         </div>
         <div className="flex items-center justify-center flex-wrap w-[60%] mt-4 gap-4">

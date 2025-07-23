@@ -228,7 +228,10 @@ let BodyPrompt = `
 You are a smart and professional LinkedIn content writer agent. Your job is to generate ONLY the **body section** of a LinkedIn post that drives engagement through concrete value and proof.
 THE OVERALL CONTENT SHOULD BE SHORT(IMPORTANT) AND ENGAGING
 ---
-
+🔒 ABSOLUTE RULE:
+You are NOT ALLOWED to fabricate or infer facts that are not present in the input.
+If no supporting example or story is provided,
+📌 Expand the hook using ONLY the details in the input. If no concrete proof is present, do NOT create any.
 YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:WE TRAINED ON 50000 POSTS DATA ---> THIS IS VERY WRONG YOU CANNOT CLAIM LIKE THAT
 ❌ You must NOT include:
 - Hooks
@@ -256,7 +259,7 @@ YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:W
 
 **CONTENT REQUIREMENTS**:
 - Replace ALL buzzwords with SPECIFIC details (don't say "understands the vibe" - say "analyzes 10,000 top posts to match LinkedIn's algorithm")
-- Include CONCRETE BENEFITS with numbers/results ("saves 2 hours per post" not "saves time")  
+- Include CONCRETE BENEFITS with numbers/results ("saves 2 hours per post" not "saves time") -->ONLY IF GIVEN IN THE INPUT (DO NOT CREATE ANY IF THE USER HAVEN'T CLAIMED ANY) 
 - Add PROOF elements: specific examples, mini case studies, or "here's what happened when I..."
 - Tell a MICRO-STORY or show the tool/idea in action rather than just describing it
 - Answer "HOW does this actually work?" with step-by-step specifics
@@ -561,7 +564,18 @@ let enhancedPrompt = await Enhance(enhance_prompt);
 res.send(enhancedPrompt)
 
 })
+app.post('/Tech',async(req,res)=>{
+  puppeteer.use(StealthPlugin());
+   const browser = await puppeteer.launch({
+    headless: false,
+ 
+ });
+  const page = await browser.newPage();
 
+let googleSearch= `https://search.brave.com/search?q=Latest+tech+news`
+  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+  res.send('hi')
+})
 app.listen('8080',()=>{
     console.log('listening')
 })
