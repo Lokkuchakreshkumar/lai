@@ -80,9 +80,8 @@ async function Tag(prompt) {
 
   const response = await ai_tag.models.generateContent({
     model: "gemini-2.5-flash", 
-    contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
-    tools: [groundingTool],
-    config, // 
+   content:prompt,
+    config, 
   });
 
   return response.text;
