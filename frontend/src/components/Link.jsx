@@ -15,11 +15,19 @@ import { BsGraphUpArrow } from "react-icons/bs";
 
 
 const Link = () => {
-  const URL = import.meta.env.VITE_URL;
+  let URL;
+  let environment = 'dev';
+  if(environment == 'dev'){
+    URL = import.meta.env.VITE_BACKEND_URL;
+  }
+  else{
+    URL = import.meta.env.VITE_URL;
+  }
+
   let [data, setData] = useState("");
   let textarearef = useRef(null)
   let newthing = useRef(null);
-  let [height,setHeight] = useState(0)
+  let [tech,setTech] = useState([]);
   let [input, setInput] = useState("");
   let [formal, setFormal] = useState(false);
   let [support, setSupport] = useState(false);
@@ -57,11 +65,60 @@ let enhanceClick = async() =>{
   }, 0);
 
 }
+let research = async (some) =>{
+  toast.loading('Reading article ',{id:'reading',duration:Infinity})
+  let data = await axios.post(`${URL}/research`,{some})
+  let realdata = await data.data
+  console.log(realdata)
+  toast.success('Read successfully',{id:'reading',duration:3000})
+
+      toast.loading("🧠 Understading", { id: "understand" });
+    setTimeout(() => {
+      toast.success('6 Agents deployed',{id:'understand'})
+      toast.remove('understand')
+    },4000 );
+  
+   setTimeout(() => {
+     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+   }, 5500);
+
+    try {
+      let data = await axios.post(`${URL}/scrape`, {
+        input: {
+          input: realdata,
+          formal: formal,
+          support: support,
+          thought: thought,
+          happy: happy,
+          short:short,
+          long:long,
+          emoji:emoji
+        },
+      });
+
+      let res = await data.data;
+      if (res) {
+        toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
+      }
+      toast.loading("Wrapping", { id: "final", duration: Infinity });
+
+      setData(res);
+      toast.success("Done", { id: "final", duration: 3000,removeDelay:1000  });
+      toast.remove('final')
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
+
+}
 let handleTech = async() =>{
-  toast.loading('Looking into Websites',{id:'tech'})
+  toast.loading('Looking into Websites',{id:'tech',duration:Infinity})
   let data = await axios.post('http://localhost:8080/Tech')
   let res = data.data;
   console.log(res)
+  setTech(res)
+  toast.success('Done',{id:'tech',duration:3000})
 }
   let handleClick = (event) => {
     console.log(event.target);
@@ -95,7 +152,7 @@ let handleTech = async() =>{
     setHeight(e.target.style.height)
   };
   let handleSubmit = async (event) => {
-    event.preventDefault();
+   if(event) event.preventDefault();
 
     setData("");
     console.log(input);
@@ -291,6 +348,21 @@ let handleTech = async() =>{
             </label>
           </div>
         </div>
+        {tech.length!=0 && <div className="w-[90%] h-full mt-8  bg-slate-950/90  border border-[#1E2639] 	 rounded-lg backdrop-blur-2xl p-4 flex  items-center custom-scrollbar  overflow-x-scroll">
+          {
+            tech.map((el)=>{
+              return (
+                <div  className="flex flex-col items-center justify-center bg-[#101827]/80 hover:cursor-pointer shadow-[inset_0_0_8px_black]
+ hover:shadow-[0_0_12px_black]/30   p-6 min-w-[18rem] sm:min-w-[25rem] h-[12rem]  max-w-[32rem]  mr-4  rounded-xl  " >
+                  <div className="w-full text-slate-100 text-lg  " >{el.title}</div>
+                  
+                  <div onClick={()=>research(el.href)}  className="  text-black font-semibold hover:scale-102 bg-linear-to-r from-cyan-500 to-blue-500/70  shadow-[inset_0_0_8px_black]  border border-cyan-600 p-4 mt-4 rounded-xl  cursor-pointer transition-all duration-200
+">Write post on this</div>
+                </div>
+              )
+            })
+          }
+               </div>}
         <button
           type="submit"
           className="bg-linear-to-r tech  group shadow-[0_0_15px_rgba(255,165,0,0.4)] hover:shadow-[0_0_30px_rgba(255,165,0,0.6)] transition-shadow  from-orange-500 to-yellow-400 font-semibold hover:cursor-pointer text-black p-4 rounded-xl sm:w-[45%] text-xl  my-8"

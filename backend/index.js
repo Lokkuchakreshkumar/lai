@@ -164,6 +164,7 @@ Final Reminder: Return ONLY the query, in one plain text line. No extras.
 
  const browser = await puppeteer.launch({
     headless: true,
+     args:['--no-sandbox', '--disable-setuid-sandbox']
   
  });
   const page = await browser.newPage();
@@ -573,7 +574,7 @@ let summary_prompt = ``;
 }
    const browser = await puppeteer.launch({
     headless: true,
- 
+ args:['--no-sandbox', '--disable-setuid-sandbox']
  });
   const page = await browser.newPage();
 
@@ -599,7 +600,7 @@ app.post('/research',async(req,res)=>{
   let search = req.body.some
    const browser = await puppeteer.launch({
     headless: true,
- 
+  args:['--no-sandbox', '--disable-setuid-sandbox']
  });
   const page = await browser.newPage();
 

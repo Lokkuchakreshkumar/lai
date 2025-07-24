@@ -77,6 +77,21 @@ a:hover{
 .mont{
     font-family: "Montserrat Alternates", sans-serif;
 }
-.sora{
-  
+/* For WebKit-based browsers (Chrome, Edge, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* or use solid like #0ea5e9 */
+  border-radius: 9999px;
+}
+
+/* Optional: On hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #38bdf8, #6366f1); /* blue to indigo glow */
 }
