@@ -164,21 +164,15 @@ Final Reminder: Return ONLY the query, in one plain text line. No extras.
 
  const browser = await puppeteer.launch({
     headless: true,
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--single-process',
-    '--disable-gpu'
-  ],
+  
  });
   const page = await browser.newPage();
    let encodedcomp = encodeURIComponent(tags)
 let googleSearch= `https://search.brave.com/search?q=${encodedcomp}`
-  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+
+await page.goto(googleSearch, { waitUntil: 'domcontentloaded' });
+
+await page.waitForSelector('div.snippet', { timeout: 10000 }); // wait 10s max
 
 const linkedInResults = await page.$$eval('div.snippet', (elements) => {
   return elements.map((e) => {
@@ -566,15 +560,68 @@ res.send(enhancedPrompt)
 })
 app.post('/Tech',async(req,res)=>{
   puppeteer.use(StealthPlugin());
+  // const ai_body = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY2});
+// const ai_learn = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY3});
+const ai_summary = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY8});
+let summary_prompt = ``;
+  async function summary(prompt) {
+  const response = await ai_summary.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
+  return response.text;
+}
    const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
  
  });
   const page = await browser.newPage();
 
-let googleSearch= `https://search.brave.com/search?q=Latest+tech+news`
+let googleSearch= `https://techcrunch.com/latest/`
   await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
-  res.send('hi')
+  let data = await page.$$eval('h3.loop-card__title',(elements)=>{
+ return   elements.map((el)=>{
+       let tag =   el.querySelector('a') 
+     if(tag){
+        return {
+        title : tag.textContent,
+        href: tag.href
+        
+       
+      }
+     }
+    })
+  })
+  res.json(data)
+})
+app.post('/research',async(req,res)=>{
+    puppeteer.use(StealthPlugin());
+  let search = req.body.some
+   const browser = await puppeteer.launch({
+    headless: true,
+ 
+ });
+  const page = await browser.newPage();
+
+let googleSearch= `${search}`
+  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+ let data = await page.$$eval('p.wp-block-paragraph',(elements)=>{
+  return elements.map((el)=>{
+    return el.textContent;
+  })
+ })
+ const ai_summary = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY8});
+let summary_prompt = `You will get the data from a tech crunch article your work is to give the article as prompt for linkedin post generator here is the post:${data},only return plain text and tell ai to generate linkedin post and tell what important points it has to cover ,nothing other than that,no messages ,no explanations`;
+  async function summary(prompt) {
+  const response = await ai_summary.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
+  return response.text;
+}
+let prompt_input = await summary(summary_prompt);
+console.log(data)
+ res.send(prompt_input)
 })
 app.listen('8080',()=>{
     console.log('listening')
