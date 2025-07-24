@@ -569,18 +569,8 @@ res.send(enhancedPrompt)
 
 })
 app.post('/Tech',async(req,res)=>{
-  puppeteer.use(StealthPlugin());
-  // const ai_body = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY2});
-// const ai_learn = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY3});
-const ai_summary = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY8});
-let summary_prompt = ``;
-  async function summary(prompt) {
-  const response = await ai_summary.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
-  return response.text;
-}
+ try {
+   puppeteer.use(StealthPlugin());
    const browser = await puppeteer.launch({
     headless: true,
 args: [
@@ -604,14 +594,15 @@ let googleSearch= `https://techcrunch.com/latest/`
      if(tag){
         return {
         title : tag.textContent,
-        href: tag.href
-        
-       
+        href: tag.href      
       }
      }
     })
   })
   res.json(data)
+ } catch (error) {
+  console.log(error)
+ }
 })
 app.post('/research',async(req,res)=>{
     puppeteer.use(StealthPlugin());

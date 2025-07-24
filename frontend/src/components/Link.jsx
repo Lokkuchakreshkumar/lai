@@ -114,7 +114,7 @@ let research = async (some) =>{
 }
 let handleTech = async() =>{
   toast.loading('Looking into Websites',{id:'tech',duration:Infinity})
-  let data = await axios.post('http://localhost:8080/Tech')
+  let data = await axios.post(`${URL}/Tech`)
   let res = data.data;
   console.log(res)
   setTech(res)
