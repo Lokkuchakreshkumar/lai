@@ -19,7 +19,7 @@ async function main(){
 }
 let expire = 30*24*60*60*1000;
 let JWT_SECRET = process.env.JWT_SECRET
-app.use(cors({origin:'https://uselai.vercel.app/',credentials:true}))
+app.use(cors({origin:'https://uselai.vercel.app',credentials:true}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.post('/scrape',async(req,res)=>{
