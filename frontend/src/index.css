@@ -19,6 +19,10 @@
 .tech{
       font-family: "Space Grotesk", sans-serif;
 }
+.newbc{
+background-image:  radial-gradient(ellipse at top left,#0e2e3f,#000)
+
+}
 /* Enable and style the scrollbar */
 /* SCROLLBAR BASE */
 ::-webkit-scrollbar {

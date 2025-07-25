@@ -15,8 +15,9 @@ import { BsGraphUpArrow } from "react-icons/bs";
 
 
 const Link = () => {
+  
   let URL;
-  let environment = 'production';
+  let environment = 'dev';
   if(environment == 'dev'){
     URL = import.meta.env.VITE_BACKEND_URL;
   }
@@ -52,7 +53,7 @@ let enhanceClick = async() =>{
   toast.loading('Enhancing Prompt ',{id:'enhance',duration:Infinity});
   let realPrompt = await axios.post(`${URL}/enhance`,{
     input
-  })
+  },{withCredentials:true})
   let data = realPrompt.data;
   setInput(data);
   toast.success('Enhanced Prompt',{id:'enhance',duration:3000,removeDelay:3000})
@@ -84,6 +85,7 @@ let research = async (some) =>{
 
     try {
       let data = await axios.post(`${URL}/scrape`, {
+        
         input: {
           input: realdata,
           formal: formal,
@@ -94,7 +96,7 @@ let research = async (some) =>{
           long:long,
           emoji:emoji
         },
-      });
+      },{withCredentials:true});
 
       let res = await data.data;
       if (res) {
@@ -182,7 +184,7 @@ let handleTech = async() =>{
           long:long,
           emoji:emoji
         },
-      });
+      },{withCredentials:true});
 
       let res = await data.data;
       if (res) {

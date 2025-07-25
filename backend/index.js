@@ -1,19 +1,44 @@
 import express from "express"
 import cors from "cors"
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Tokens } from "@google/genai";
 const app = express();
-
+import mongoose from "mongoose"
 import dotenv from "dotenv"
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
-
+import User from "./models/user.js"
+import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
+import cookieParser from "cookie-parser";
 dotenv.config()
-
-app.use(cors())
+app.use(cookieParser())
+async function main(){
+  await mongoose.connect(process.env.MONGO_URI)
+}
+let expire = 30*24*60*60*1000;
+let JWT_SECRET = process.env.JWT_SECRET
+app.use(cors({origin:'http://localhost:5173',credentials:true}))
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.post('/scrape',async(req,res)=>{
  try {
-   const ai_bang = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY7});
+  const token = req.cookies.token;
+ console.log(`this is token:${token}`)
+  if(token){
+  const decoded = jwt.verify(token,JWT_SECRET);
+  const user = await User.findById(decoded.id);
+  let credits = user.credits;
+  
+  credits = credits - 0.5;
+  console.log(credits)
+   user.credits = credits;
+   if(user.credits === 0){
+    return res.json({limit:'limit reached'})
+   }
+   await user.save();
+  }
+
+const ai_bang = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY7});
 const ai_body = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY2});
 const ai_learn = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY3});
 const ai_cta = new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY4});
@@ -164,16 +189,16 @@ Final Reminder: Return ONLY the query, in one plain text line. No extras.
 
  const browser = await puppeteer.launch({
     headless: true,
-     args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--single-process',
-    '--disable-gpu'
-  ],
+  //    args: [
+  //   '--no-sandbox',
+  //   '--disable-setuid-sandbox',
+  //   '--disable-dev-shm-usage',
+  //   '--disable-accelerated-2d-canvas',
+  //   '--no-first-run',
+  //   '--no-zygote',
+  //   '--single-process',
+  //   '--disable-gpu'
+  // ],
   
  });
   const page = await browser.newPage();
@@ -518,6 +543,21 @@ res.json({
 
 })
 app.post('/enhance',async (req,res)=>{
+   const token = req.cookies.token;
+ console.log(`this is token:${token}`)
+  if(token){
+  const decoded = jwt.verify(token,JWT_SECRET);
+  const user = await User.findById(decoded.id);
+  let credits = user.credits;
+  
+  credits = credits - 0.5;
+  console.log(credits)
+   user.credits = credits;
+   if(user.credits === 0){
+    return res.json({limit:'limit reached'})
+   }
+   await user.save();
+  }
   let userPrompt = req.body.input;
   console.log(userPrompt)
   
@@ -573,16 +613,16 @@ app.post('/Tech',async(req,res)=>{
    puppeteer.use(StealthPlugin());
    const browser = await puppeteer.launch({
     headless: true,
-args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--single-process',
-    '--disable-gpu'
-  ],
+// args: [
+//     '--no-sandbox',
+//     '--disable-setuid-sandbox',
+//     '--disable-dev-shm-usage',
+//     '--disable-accelerated-2d-canvas',
+//     '--no-first-run',
+//     '--no-zygote',
+//     '--single-process',
+//     '--disable-gpu'
+//   ],
  });
   const page = await browser.newPage();
 
@@ -609,16 +649,16 @@ app.post('/research',async(req,res)=>{
   let search = req.body.some
    const browser = await puppeteer.launch({
     headless: true,
-args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--single-process',
-    '--disable-gpu'
-  ],
+// args: [
+//     '--no-sandbox',
+//     '--disable-setuid-sandbox',
+//     '--disable-dev-shm-usage',
+//     '--disable-accelerated-2d-canvas',
+//     '--no-first-run',
+//     '--no-zygote',
+//     '--single-process',
+//     '--disable-gpu'
+//   ],
  });
   const page = await browser.newPage();
 
@@ -642,6 +682,74 @@ let prompt_input = await summary(summary_prompt);
 console.log(data)
  res.send(prompt_input)
 })
+
+app.post('/signup',async( req,res)=>{
+  const {userName,email,password} = req.body;
+const userExist = await User.findOne({email})
+if(userExist){
+  return res.status(409).json({
+    msg:'user already exist'
+  })
+}
+const hashed = await bcrypt.hash(password,10);
+const newUser = new User({userName:userName,email:email,password:hashed});
+await newUser.save();
+const token = jwt.sign({id:newUser._id},JWT_SECRET,{expiresIn:'30d'});
+res.cookie('token',token,{
+  httpOnly:true,
+  maxAge:expire,
+  secure:false,
+  sameSite:'lax'
+})
+res.status(200).send('successfull signup')
+})
+app.post('/login',async(req,res)=>{
+  let {email,password} = req.body;
+  const user = await User.findOne({email});
+  if(!user){
+    return res.status(404).json({
+      msg:'Sign up first'
+    })
+  }
+ const match = await bcrypt.compare(password,user.password)
+ if(!match){
+  return res.status(401).json({
+    msg:'Wrong password'
+  })
+ }
+ const token = jwt.sign({id:user._id},JWT_SECRET, {expiresIn:'30d'})
+ res.cookie('token',token,{
+  httpOnly:true,
+  secure:false,
+  maxAge:expire,
+  sameSite:'lax'
+ })
+ res.status(200).send('successfull Login')
+})
+app.get('/user',async (req,res)=>{
+
+  const token = req.cookies.token;
+    console.log(`this is token from the user:${token}`)
+  if(!token) return res.status(404).json({msg:'please login'});
+  try{
+    const decoded = jwt.verify(token,JWT_SECRET)
+    let user = await User.findById(decoded.id)
+    let credits = user.credits;
+    res.json({credits})
+  }
+  catch{
+    res.status(400).json({msg:'login again'})
+  }
+})
+app.post('/logout',(req,res)=>{
+  res.clearCookie('token',)
+  res.status(200).json({msg:'logged out'})
+})
 app.listen('8080',()=>{
+  main().then(()=>{
+  console.log('connected')
+}).catch((err)=>{
+  console.log(err)
+})
     console.log('listening')
 })
