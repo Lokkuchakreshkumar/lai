@@ -6,7 +6,7 @@ import axios from "axios"
 
 
 const App = () => {
-  let Navigate = useNavigate()
+  let navigate = useNavigate()
   let URL;
   let environment = 'production';
   if(environment == 'dev'){
@@ -27,7 +27,7 @@ setCredit(realdata.credits)
 } catch (error) {
   console.log(error)
   if(error && error.response && error.response.status == 401){
-    Navigate('/login')
+    navigate('/login')
     setDone(true)
   }
    
@@ -40,7 +40,7 @@ setCredit(realdata.credits)
      let data = axios.post(`${URL}/logout`,{},{withCredentials:true})
     let realdata = await data.data;
     console.log(realdata)
-    Navigate('/login')
+    navigate('/login')
    } catch (error) {
     console.log(error)
    }
@@ -48,10 +48,10 @@ setCredit(realdata.credits)
 
   let [done,setDone] = useState(false)
   let handleClick = () =>{
-  Navigate('/login')
+  navigate('/login')
   }
   let handleSignup = () =>{
-    Navigate('/signup')
+    navigate('/signup')
   }
 
   return (
