@@ -727,7 +727,6 @@ app.post('/login',async(req,res)=>{
  res.status(200).send('successfull Login')
 })
 app.get('/user',async (req,res)=>{
-
   const token = req.cookies.token;
     console.log(`this is token from the user:${token}`)
   if(!token) return res.status(404).json({msg:'please login'});

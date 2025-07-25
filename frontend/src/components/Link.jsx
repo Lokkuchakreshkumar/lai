@@ -17,7 +17,7 @@ import { BsGraphUpArrow } from "react-icons/bs";
 const Link = () => {
   
   let URL;
-  let environment = 'dev';
+  let environment = 'production';
   if(environment == 'dev'){
     URL = import.meta.env.VITE_BACKEND_URL;
   }
