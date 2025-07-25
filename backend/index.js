@@ -728,17 +728,17 @@ app.post('/login',async(req,res)=>{
 })
 app.get('/user',async (req,res)=>{
   const token = req.cookies.token;
+  if(!token){
+    return res.status(404).json({msg:'no token'});
+  }
     console.log(`this is token from the user:${token}`)
-  if(!token) return res.status(404).json({msg:'please login'});
-  try{
+
+ 
     const decoded = jwt.verify(token,JWT_SECRET)
     let user = await User.findById(decoded.id)
     let credits = user.credits;
     res.json({credits})
-  }
-  catch{
-    res.status(400).json({msg:'login again'})
-  }
+ 
 })
 app.post('/logout',(req,res)=>{
   res.clearCookie('token',)
