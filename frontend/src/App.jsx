@@ -26,7 +26,7 @@ setCredit(realdata.credits)
  
 } catch (error) {
   console.log(error)
-  if(error.response.status == 401){
+  if(error && error.response && error.response.status == 401){
     Navigate('/login')
     setDone(true)
   }
