@@ -189,16 +189,16 @@ Final Reminder: Return ONLY the query, in one plain text line. No extras.
 
  const browser = await puppeteer.launch({
     headless: true,
-  //    args: [
-  //   '--no-sandbox',
-  //   '--disable-setuid-sandbox',
-  //   '--disable-dev-shm-usage',
-  //   '--disable-accelerated-2d-canvas',
-  //   '--no-first-run',
-  //   '--no-zygote',
-  //   '--single-process',
-  //   '--disable-gpu'
-  // ],
+     args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
+  ],
   
  });
   const page = await browser.newPage();
@@ -613,16 +613,16 @@ app.post('/Tech',async(req,res)=>{
    puppeteer.use(StealthPlugin());
    const browser = await puppeteer.launch({
     headless: true,
-// args: [
-//     '--no-sandbox',
-//     '--disable-setuid-sandbox',
-//     '--disable-dev-shm-usage',
-//     '--disable-accelerated-2d-canvas',
-//     '--no-first-run',
-//     '--no-zygote',
-//     '--single-process',
-//     '--disable-gpu'
-//   ],
+args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
+  ],
  });
   const page = await browser.newPage();
 
@@ -649,16 +649,16 @@ app.post('/research',async(req,res)=>{
   let search = req.body.some
    const browser = await puppeteer.launch({
     headless: true,
-// args: [
-//     '--no-sandbox',
-//     '--disable-setuid-sandbox',
-//     '--disable-dev-shm-usage',
-//     '--disable-accelerated-2d-canvas',
-//     '--no-first-run',
-//     '--no-zygote',
-//     '--single-process',
-//     '--disable-gpu'
-//   ],
+args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
+  ],
  });
   const page = await browser.newPage();
 
