@@ -698,8 +698,8 @@ const token = jwt.sign({id:newUser._id},JWT_SECRET,{expiresIn:'30d'});
 res.cookie('token',token,{
   httpOnly:true,
   maxAge:expire,
-  secure:false,
-  sameSite:'lax'
+  secure:true,
+  sameSite:'None'
 })
 res.status(200).send('successfull signup')
 })
@@ -720,9 +720,9 @@ app.post('/login',async(req,res)=>{
  const token = jwt.sign({id:user._id},JWT_SECRET, {expiresIn:'30d'})
  res.cookie('token',token,{
   httpOnly:true,
-  secure:false,
+  secure:true,
   maxAge:expire,
-  sameSite:'lax'
+  sameSite:'None'
  })
  res.status(200).send('successfull Login')
 })
