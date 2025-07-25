@@ -6,6 +6,7 @@ import axios from "axios"
 
 
 const App = () => {
+  let Navigate = useNavigate()
   let URL;
   let environment = 'production';
   if(environment == 'dev'){
@@ -44,7 +45,7 @@ setCredit(realdata.credits)
     console.log(error)
    }
   }
-let Navigate = useNavigate()
+
   let [done,setDone] = useState(false)
   let handleClick = () =>{
   Navigate('/login')

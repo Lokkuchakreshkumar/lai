@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import { GoogleGenAI, Tokens } from "@google/genai";
 const app = express();
+app.set("trust proxy", 1);
+
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import puppeteer from "puppeteer-extra";
