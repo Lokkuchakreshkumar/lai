@@ -731,7 +731,7 @@ app.post('/login',async(req,res)=>{
 app.get('/user',async (req,res)=>{
   const token = req.cookies.token;
   if(!token){
-    return res.status(404).json({msg:'no token'});
+    return res.status(401).json({msg:'no token'});
   }
     console.log(`this is token from the user:${token}`)
 
