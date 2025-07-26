@@ -31,12 +31,13 @@ app.post('/scrape',async(req,res)=>{
   const user = await User.findById(decoded.id);
   let credits = user.credits;
   
-  credits = credits - 0.5;
-  console.log(credits)
-   user.credits = credits;
+ 
    if(user.credits === 0){
     return res.status(401).json({limit:'limit reached'})
    }
+    credits = credits - 0.5;
+  console.log(credits)
+   user.credits = credits;
    await user.save();
   }
 
