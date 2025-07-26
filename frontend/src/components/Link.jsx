@@ -109,7 +109,7 @@ let research = async (some) =>{
       toast.remove('final')
       console.log(res);
     } catch (error) {
-      console.log(error);
+      console.log(`THIS IS ERROR:${error}`);
       if(error.response.status == 401){
         toast.error('limit reached')
       }
