@@ -203,7 +203,7 @@ let handleTech = async() =>{
       console.log(error);
         console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
-        toast.error('limit reached')
+       return toast.error('limit reached')
       }
     }
   };
