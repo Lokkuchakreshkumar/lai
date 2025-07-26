@@ -13,7 +13,7 @@ const Signup = () => {
     const fp = await fpPromise;
     const result = await fp.get()
     console.log(result.visitorId)
-    return visitorId;
+    return result.visitorId;
   }
   let URL;
   let environment = 'production';
