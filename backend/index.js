@@ -714,7 +714,7 @@ if(userExist){
   })
 }
 if(deviceExist){
-  return res.status(403),json({
+  return res.status(403).json({
     msg:'this device is already logged in'
   })
 }
