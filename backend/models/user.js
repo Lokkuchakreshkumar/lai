@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         type:Number,
         default:5
 
+    },
+    visitorId:{
+        type:String,
+        unique:true,
     }
 
 })

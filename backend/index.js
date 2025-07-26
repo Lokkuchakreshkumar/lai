@@ -12,8 +12,10 @@ import User from "./models/user.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser";
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
 dotenv.config()
 app.use(cookieParser())
+
 async function main(){
   await mongoose.connect(process.env.MONGO_URI)
 }
@@ -687,15 +689,21 @@ console.log(data)
 })
 
 app.post('/signup',async( req,res)=>{
-  const {userName,email,password} = req.body;
+  const {userName,email,password,visitorId} = req.body;
 const userExist = await User.findOne({email})
+const deviceExist = await User.findOne({visitorId})
 if(userExist){
   return res.status(409).json({
     msg:'user already exist'
   })
 }
+if(deviceExist){
+  return res.status(409),json({
+    msg:'this device is already logged in'
+  })
+}
 const hashed = await bcrypt.hash(password,10);
-const newUser = new User({userName:userName,email:email,password:hashed});
+const newUser = new User({userName:userName,email:email,password:hashed,visitorId:visitorId});
 await newUser.save();
 const token = jwt.sign({id:newUser._id},JWT_SECRET,{expiresIn:'30d'});
 res.cookie('token',token,{

@@ -3,8 +3,14 @@ import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import { FaHandHoldingWater } from 'react-icons/fa';
+
 const Signup = () => {
+  const fpPromise = FingerprintJS.load();
+  let getId =  async()=>{
+    const fp = await fpPromise;
+    const result = await fp.get()
+    console.log(result.visitorId)
+  }
   let URL;
   let environment = 'production';
   if(environment == 'dev'){
@@ -32,10 +38,11 @@ setEmail(event.target.value)
   }
   let formSubmit = async (event) =>{
     event.preventDefault();
-    console.log(email,userName,password)
+    let visitorId = await getId();
+    console.log(email,userName,password,visitorId)
  try {
      let data = await axios.post(`${URL}/signup`,{
-      userName,email,password
+      userName,email,password,visitorId
     },{withCredentials:true})
     let realdata = await data.data
     console.log(realdata)
