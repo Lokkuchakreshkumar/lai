@@ -171,7 +171,7 @@ let handleTech = async() =>{
     try {
       
   
-        toast.loading("🧠 Understading", { id: "understand" });
+    
   
 
   
@@ -188,11 +188,7 @@ let handleTech = async() =>{
         },
       },{withCredentials:true});
    
-      toast.success('6 Agents deployed',{id:'understand'})
-      toast.remove('understand')
-  
-
-   
+    
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
 
       let res = await data.data;
