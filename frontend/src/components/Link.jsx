@@ -91,14 +91,14 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
-  setTimeout(() => {
+ 
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
-    },4000 );
 
-   setTimeout(() => {
+
+
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-   }, 5500);
+
       let res = await data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
@@ -187,14 +187,14 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
-    setTimeout(() => {
+   
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
-    },4000 );
+  
 
-   setTimeout(() => {
+   
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-   }, 5500);
+
       let res = await data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
