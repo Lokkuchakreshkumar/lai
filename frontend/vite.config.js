@@ -6,5 +6,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  plugins: [react(), copyManifest(),tailwindcss()],
+  plugins: [react(),tailwindcss()],
 });
