@@ -764,6 +764,9 @@ if(!decoded){
    return res.status(401).json({msg:'no token'});
 }
     let user = await User.findById(decoded.id)
+    if(!user || user == null){
+       return res.status(401).json({msg:'no token'});
+    }
     let credits = user.credits;
     res.json({credits})
  
