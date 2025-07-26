@@ -99,7 +99,7 @@ let research = async (some) =>{
         },
       },{withCredentials:true});
  toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-      let res = await data.data;
+      let res = data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
       }
@@ -201,7 +201,7 @@ let handleTech = async() =>{
       },{withCredentials:true});
       toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
 
-      let res = await data.data;
+      let res = data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
       }
