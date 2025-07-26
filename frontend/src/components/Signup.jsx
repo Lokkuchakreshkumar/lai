@@ -56,7 +56,10 @@ setEmail(event.target.value)
 
    return toast.error('User already exist with mail id')
   }
- 
+  if(error.response.status == 403){
+
+   return toast.error('Device linked. Use existing account')
+  }
  
  }
   }
