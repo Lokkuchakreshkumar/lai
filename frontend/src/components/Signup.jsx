@@ -17,7 +17,7 @@ const Signup = () => {
     return result.visitorId;
   }
   let URL;
-  let environment = 'dev';
+  let environment = 'production';
   if(environment == 'dev'){
     URL = import.meta.env.VITE_BACKEND_URL;
   }
