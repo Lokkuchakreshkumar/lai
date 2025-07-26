@@ -76,12 +76,7 @@ let research = async (some) =>{
     
 
     try {
-        toast.loading("🧠 Understading", { id: "understand" });
-    setTimeout(() => {
-      toast.success('6 Agents deployed',{id:'understand'})
-      toast.remove('understand')
-    },4000 );
-  
+      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
   
     
    
@@ -98,9 +93,8 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
-        toast.dismiss("understand"); // Clear previous
-  toast.success("✅ 6 Agents deployed");
- toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+ 
+
       let res = data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
@@ -112,12 +106,11 @@ let research = async (some) =>{
       toast.remove('final')
       console.log(res);
     } catch (error) {
-       toast.remove('final');
+     
       toast.remove('write')
-       toast.dismiss('understand');
-        toast.dismiss('final');
+     
       toast.dismiss('write')
-       toast.remove('understand');
+    
       console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
       return  toast.error('limit reached')
@@ -177,11 +170,7 @@ let handleTech = async() =>{
    
 
     try {
-        toast.loading("🧠 Understading", { id: "understand" });
-    setTimeout(() => {
-      toast.success('6 Agents deployed',{id:'understand'})
-      toast.remove('understand')
-    },4000 );
+      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
   
 
    
@@ -201,9 +190,8 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
-         toast.dismiss("understand"); // Clear previous
-  toast.success("✅ 6 Agents deployed");
-      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+    
+      
 
       let res = data.data;
       if (res) {
@@ -217,12 +205,11 @@ let handleTech = async() =>{
       console.log(res);
     } catch (error) {
       console.log(error);
-      toast.remove('final');
+   
       toast.remove('write')
-       toast.dismiss('understand');
-        toast.dismiss('final');
+      
       toast.dismiss('write')
-       toast.remove('understand');
+      
         console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
        return toast.error('limit reached')
