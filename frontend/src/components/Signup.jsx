@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
+import { LineWave } from "react-loader-spinner";
 
 const Signup = () => {
+  let [loading,setLoading] = useState(false)
   const fpPromise = FingerprintJS.load();
   let getId =  async()=>{
     const fp = await fpPromise;
     const result = await fp.get()
     console.log(result.visitorId)
+    return visitorId;
   }
   let URL;
   let environment = 'production';
@@ -47,6 +50,7 @@ setEmail(event.target.value)
     },{withCredentials:true})
     let realdata = await data.data
     console.log(realdata)
+    setLoading(true)
   navigate('/')
  
 
@@ -65,7 +69,9 @@ setEmail(event.target.value)
   }
  return (
     <div className="newbc min-h-screen flex flex-col justify-center items-center ">
-      <div>
+  {
+    !loading &&  
+     <div>   <div>
         
           <div className=" text-5xl mont backdrop:blur-3xl w-full text-[#0C8EE5] ">
             Login to uselai
@@ -116,7 +122,21 @@ setEmail(event.target.value)
                     },
                   },
                 }}
-              />
+              /></div>
+  }
+  {
+    loading &&  <div className="flex justify-center items-center">
+          <LineWave
+  height="80"
+  width="100"
+  radius="9"
+  color="cyan"
+  ariaLabel="three-dots-loading"
+  wrapperStyle={{}}        // ✅ Provide a valid object
+  wrapperClass=""          // ✅ Provide a valid string
+/>
+        </div>
+  }
     </div>
     
   );
