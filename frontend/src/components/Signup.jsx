@@ -17,7 +17,7 @@ const Signup = () => {
     return result.visitorId;
   }
   let URL;
-  let environment = 'production';
+  let environment = 'dev';
   if(environment == 'dev'){
     URL = import.meta.env.VITE_BACKEND_URL;
   }
@@ -74,7 +74,7 @@ setEmail(event.target.value)
     !loading &&  
      <div>   <div>
         
-          <div className=" text-5xl mont backdrop:blur-3xl w-full text-[#0C8EE5] ">
+          <div className=" text-5xl mont backdrop:blur-3xl w-full text-center text-[#0C8EE5] ">
             Sign up to uselai
           </div>
           <div className="border border-cyan-700 rounded-xl w-full mt-8">
