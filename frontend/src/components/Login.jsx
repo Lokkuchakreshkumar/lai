@@ -53,7 +53,8 @@ setEmail(event.target.value)
   }
   return (
     <div className="newbc min-h-screen flex flex-col justify-center items-center ">
-      <div>
+{
+  !loading &&       <div>
         
           <div className=" text-5xl mont backdrop:blur-3xl w-full text-[#0C8EE5] ">
             Login to uselai
@@ -76,46 +77,22 @@ setEmail(event.target.value)
           
         </div>
       </div>
+}
+      
       {
         loading && <div className="flex justify-center items-center">
-      <LineWave
+          <LineWave
   height="80"
   width="80"
   radius="9"
   color="green"
-  ariaLabel="line-wave"
+  ariaLabel="three-dots-loading"
   wrapperStyle={{}}        // ✅ Provide a valid object
   wrapperClass=""          // ✅ Provide a valid string
 />
-
         </div>
       }
-        <Toaster
-                position="bottom-center"
-                reverseOrder={false}
-                gutter={8}
-                containerClassName=""
-                containerStyle={{}}
-                toastOptions={{
-                  className: "text-lg",
-                  duration: 3000,
-      
-                  style: {
-                    background: "#363636",
-                    color: "#fff",
-                  },
-      
-                  success: {
-                    duration: 3000,
-                    removeDelay: 1000,
-                    iconTheme: {
-                      primary: "green",
-                      secondary: "black",
-                    },
-                  },
-                }}
-              />
-    </div>
+</div>
     
   );
 };
