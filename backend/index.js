@@ -759,9 +759,10 @@ app.get('/user',async (req,res)=>{
     return res.status(401).json({msg:'no token'});
   }
     console.log(`this is token from the user:${token}`)
-
- 
-    const decoded = jwt.verify(token,JWT_SECRET)
+const decoded = jwt.verify(token,JWT_SECRET)
+if(!decoded){
+   return res.status(401).json({msg:'no token'});
+}
     let user = await User.findById(decoded.id)
     let credits = user.credits;
     res.json({credits})
