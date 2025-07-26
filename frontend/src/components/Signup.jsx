@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 import { LineWave } from "react-loader-spinner";
+import { IoIosWarning } from "react-icons/io";
 
 const Signup = () => {
   let [loading,setLoading] = useState(false)
@@ -74,7 +75,7 @@ setEmail(event.target.value)
      <div>   <div>
         
           <div className=" text-5xl mont backdrop:blur-3xl w-full text-[#0C8EE5] ">
-            Login to uselai
+            Sign up to uselai
           </div>
           <div className="border border-cyan-700 rounded-xl w-full mt-8">
             <form onSubmit={formSubmit} className="p-8 flex flex-col items-center justify-center w-full">
@@ -97,6 +98,9 @@ setEmail(event.target.value)
             </form>
           
         </div>
+       <div className='flex items-center p-2 rounded-lg  border mt-8 border-yellow-300'>
+         <div className='text-white/80 '><IoIosWarning className='inline text-yellow-400 m-2'/>we use one device one login policy,so be carefull while entering your details</div>
+       </div>
       </div>
         <Toaster
                 position="bottom-center"
