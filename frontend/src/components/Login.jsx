@@ -3,8 +3,10 @@ import "../index.css";
 import axios from 'axios'
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { LineWave } from "react-loader-spinner";
 const Login = () => {
   let URL;
+  let [loading,setLoading] = useState(false)
   let environment = 'production';
   if(environment == 'dev'){
     URL = import.meta.env.VITE_BACKEND_URL;
@@ -26,6 +28,7 @@ setEmail(event.target.value)
   }
   let formSubmit = async (event) =>{
     event.preventDefault();
+    setLoading(true)
     console.log(email,password)
  try {
      let data = await axios.post(`${URL}/login`,{
@@ -33,6 +36,7 @@ setEmail(event.target.value)
     },{withCredentials:true})
     let realdata = await data.data
     console.log(realdata)
+   
   Navigate('/')
  } catch (error) {
  
@@ -72,6 +76,19 @@ setEmail(event.target.value)
           
         </div>
       </div>
+      {
+        loading && <div className="flex justify-center items-center">
+          <LineWave
+  height="80"
+  width="80"
+  radius="9"
+  color="green"
+  ariaLabel="three-dots-loading"
+  wrapperStyle
+  wrapperClass
+/>
+        </div>
+      }
         <Toaster
                 position="bottom-center"
                 reverseOrder={false}
