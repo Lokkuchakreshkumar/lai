@@ -62,7 +62,7 @@ setCredit(realdata.credits)
       done &&  <div> <div onClick={handleClick} className="text-white">Login</div>
       <div onClick={handleSignup} className="text-white">Sign up</div></div>
      }
-    <div className="flex items-center space-x-8 ml-auto"> {credit>=0 && <div className="ml-auto p-3 bg-[#15231D]  text-green-600 rounded-sm"><span className="text-amber-400">$</span><span className="font-semibold">{credit}</span> left</div>}
+    <div className="flex items-center space-x-8 ml-auto"> {credit>=0 && <div className="ml-auto p-3 bg-[#15231D]  text-green-600 rounded-sm"><span className="font-bold"><span className="text-amber-400">$</span><span >{credit}</span></span> left</div>}
      {
       !done && <div  onClick={logout} className=" px-4 py-2 hover:bg-black hover:cursor-pointer hover:scale-101 transition duration-400 border rounded text-white">Log out</div>
      }</div>
