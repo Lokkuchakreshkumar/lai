@@ -90,9 +90,7 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
-
-      let res = await data.data;
-          toast.loading("🧠 Understading", { id: "understand" });
+  toast.loading("🧠 Understading", { id: "understand" });
     setTimeout(() => {
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
@@ -101,6 +99,8 @@ let research = async (some) =>{
    setTimeout(() => {
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
    }, 5500);
+      let res = await data.data;
+        
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
       }
@@ -171,10 +171,6 @@ let handleTech = async() =>{
 
     try {
       
-  
-   
-
-  
       let data = await axios.post(`${URL}/scrape`, {
         input: {
           input: input,
@@ -187,8 +183,17 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
+     toast.loading("🧠 Understading", { id: "understand" });
+    setTimeout(() => {
+      toast.success('6 Agents deployed',{id:'understand'})
+      toast.remove('understand')
+    },4000 );
+  
+   setTimeout(() => {
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+   }, 5500);
       let res = await data.data;
+      
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
       }
