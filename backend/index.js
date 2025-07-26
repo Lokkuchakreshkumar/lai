@@ -35,7 +35,7 @@ app.post('/scrape',async(req,res)=>{
   console.log(credits)
    user.credits = credits;
    if(user.credits === 0){
-    return res.json({limit:'limit reached'})
+    return res.status(401).json({limit:'limit reached'})
    }
    await user.save();
   }
