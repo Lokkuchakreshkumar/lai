@@ -110,9 +110,9 @@ let research = async (some) =>{
       toast.remove('final')
       console.log(res);
     } catch (error) {
-         toast.dismiss('final');
-      toast.dismiss('write')
-       toast.dismiss('understand');
+         toast.remove('final');
+      toast.remove('write')
+       toast.remove('understand');
       console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
       return  toast.error('limit reached')
@@ -210,9 +210,9 @@ let handleTech = async() =>{
       console.log(res);
     } catch (error) {
       console.log(error);
-      toast.dismiss('final');
-      toast.dismiss('write')
-       toast.dismiss('understand');
+      toast.remove('final');
+      toast.remove('write')
+       toast.remove('understand');
         console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
        return toast.error('limit reached')
