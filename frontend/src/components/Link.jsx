@@ -90,7 +90,9 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
-   toast.loading("🧠 Understading", { id: "understand" });
+   setTimeout(() => {
+    toast.loading("🧠 Understading", { id: "understand" });
+   }, 2000);
     setTimeout(() => {
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
@@ -186,7 +188,9 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
-      toast.loading("🧠 Understading", { id: "understand" });
+    setTimeout(() => {
+    toast.loading("🧠 Understading", { id: "understand" });
+   }, 2000);
     setTimeout(() => {
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
