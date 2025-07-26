@@ -83,9 +83,9 @@ setEmail(event.target.value)
         loading && <div className="flex justify-center items-center">
           <LineWave
   height="80"
-  width="80"
+  width="100"
   radius="9"
-  color="green"
+  color="cyan"
   ariaLabel="three-dots-loading"
   wrapperStyle={{}}        // ✅ Provide a valid object
   wrapperClass=""          // ✅ Provide a valid string
