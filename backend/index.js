@@ -12,7 +12,7 @@ import User from "./models/user.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser";
-import FingerprintJS from '@fingerprintjs/fingerprintjs'
+
 dotenv.config()
 app.use(cookieParser())
 
