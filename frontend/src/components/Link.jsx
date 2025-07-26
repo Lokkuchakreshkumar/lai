@@ -98,6 +98,8 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
+        toast.dismiss("understand"); // Clear previous
+  toast.success("✅ 6 Agents deployed");
  toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
       let res = data.data;
       if (res) {
@@ -199,6 +201,8 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
+         toast.dismiss("understand"); // Clear previous
+  toast.success("✅ 6 Agents deployed");
       toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
 
       let res = data.data;
