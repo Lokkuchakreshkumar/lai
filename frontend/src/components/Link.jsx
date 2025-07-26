@@ -72,12 +72,19 @@ let research = async (some) =>{
   let realdata = await data.data
   console.log(realdata)
   toast.success('Read successfully',{id:'reading',duration:3000})
-     toast.loading("🧠 Understading", { id: "understand" });
-   
+
     
 
     try {
-     
+        toast.loading("🧠 Understading", { id: "understand" });
+    setTimeout(() => {
+      toast.success('6 Agents deployed',{id:'understand'})
+      toast.remove('understand')
+    },4000 );
+  
+   setTimeout(() => {
+     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+   }, 5500);
       let data = await axios.post(`${URL}/scrape`, {
         
         input: {
@@ -91,13 +98,6 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
- 
-      toast.success('6 Agents deployed',{id:'understand'})
-      toast.remove('understand')
-
-
-
-     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
 
       let res = await data.data;
       if (res) {
@@ -110,6 +110,9 @@ let research = async (some) =>{
       toast.remove('final')
       console.log(res);
     } catch (error) {
+         toast.dismiss('final');
+      toast.dismiss('write')
+       toast.dismiss('understand');
       console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
       return  toast.error('limit reached')
@@ -169,10 +172,17 @@ let handleTech = async() =>{
    
 
     try {
-      
+        toast.loading("🧠 Understading", { id: "understand" });
+    setTimeout(() => {
+      toast.success('6 Agents deployed',{id:'understand'})
+      toast.remove('understand')
+    },4000 );
   
-    
+   setTimeout(() => {
+     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+   }, 5500);
   
+   
 
   
       let data = await axios.post(`${URL}/scrape`, {
@@ -187,10 +197,7 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
-   
     
-     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-
       let res = await data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
@@ -203,6 +210,9 @@ let handleTech = async() =>{
       console.log(res);
     } catch (error) {
       console.log(error);
+      toast.dismiss('final');
+      toast.dismiss('write')
+       toast.dismiss('understand');
         console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
        return toast.error('limit reached')
