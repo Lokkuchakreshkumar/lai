@@ -269,6 +269,7 @@ THE OVERALL CONTENT SHOULD BE SHORT(IMPORTANT) AND ENGAGING
 🔒 ABSOLUTE RULE:
 You are NOT ALLOWED to fabricate or infer facts that are not present in the input.
 If no supporting example or story is provided,
+"Refine the tone to be motivational and approachable, avoiding overly dramatic language, and broaden the focus to emphasize the universal value of lifelong learning for personal growth and adaptability, not just career strategy."
 📌 Expand the hook using ONLY the details in the input. If no concrete proof is present, do NOT create any.
 YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:WE TRAINED ON 50000 POSTS DATA ---> THIS IS VERY WRONG YOU CANNOT CLAIM LIKE THAT
 ❌ You must NOT include:
@@ -299,7 +300,7 @@ YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:W
 - Use 1-2 sentence paragraphs MAX
 - Add line breaks every 2-3 lines for mobile readability
 - Use bullet points, numbers, or emojis to break up text visually
-
+-NO OVER-DRAMA
 **CONTENT REQUIREMENTS**:
 - Replace ALL buzzwords with SPECIFIC details (don't say "understands the vibe" - say "analyzes 10,000 top posts to match LinkedIn's algorithm")
 - Include CONCRETE BENEFITS with numbers/results ("saves 2 hours per post" not "saves time") -->ONLY IF GIVEN IN THE INPUT (DO NOT CREATE ANY IF THE USER HAVEN'T CLAIMED ANY) 
