@@ -82,9 +82,9 @@ let research = async (some) =>{
       toast.remove('understand')
     },4000 );
   
-   setTimeout(() => {
-     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-   }, 5500);
+  
+    
+   
       let data = await axios.post(`${URL}/scrape`, {
         
         input: {
@@ -98,7 +98,7 @@ let research = async (some) =>{
           emoji:emoji
         },
       },{withCredentials:true});
-
+ toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
       let res = await data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
@@ -181,9 +181,8 @@ let handleTech = async() =>{
       toast.remove('understand')
     },4000 );
   
-   setTimeout(() => {
-     toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
-   }, 5500);
+
+   
   
    
 
@@ -200,7 +199,8 @@ let handleTech = async() =>{
           emoji:emoji
         },
       },{withCredentials:true});
-    
+      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
+
       let res = await data.data;
       if (res) {
         toast.success("Post done", { id: "write", duration: 3000,removeDelay:1000 });
