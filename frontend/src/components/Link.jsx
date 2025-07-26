@@ -73,7 +73,10 @@ let research = async (some) =>{
   console.log(realdata)
   toast.success('Read successfully',{id:'reading',duration:3000})
 
-      toast.loading("🧠 Understading", { id: "understand" });
+    
+
+    try {
+        toast.loading("🧠 Understading", { id: "understand" });
     setTimeout(() => {
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
@@ -82,8 +85,6 @@ let research = async (some) =>{
    setTimeout(() => {
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
    }, 5500);
-
-    try {
       let data = await axios.post(`${URL}/scrape`, {
         
         input: {
@@ -111,7 +112,7 @@ let research = async (some) =>{
     } catch (error) {
       console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
-        toast.error('limit reached')
+      return  toast.error('limit reached')
       }
     }
 
@@ -165,7 +166,10 @@ let handleTech = async() =>{
       toast.error("Write your post");
       return;
     }
-      toast.loading("🧠 Understading", { id: "understand" });
+   
+
+    try {
+         toast.loading("🧠 Understading", { id: "understand" });
     setTimeout(() => {
       toast.success('6 Agents deployed',{id:'understand'})
       toast.remove('understand')
@@ -174,8 +178,6 @@ let handleTech = async() =>{
    setTimeout(() => {
      toast.loading("✍️ Writing post...", { id: "write", duration: Infinity });
    }, 5500);
-
-    try {
       let data = await axios.post(`${URL}/scrape`, {
         input: {
           input: input,
