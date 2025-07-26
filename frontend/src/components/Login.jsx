@@ -14,9 +14,9 @@ const Login = () => {
   else{
     URL = import.meta.env.VITE_URL;
   }
-  let Navigate = useNavigate()
+  let navigate = useNavigate()
   let signupClick = () =>{
-         Navigate('/signup');
+         navigate('/signup');
   }
   let [email,setEmail] = useState('')
   let [password,setPassword] = useState('');
@@ -37,7 +37,7 @@ setEmail(event.target.value)
     let realdata = await data.data
     console.log(realdata)
    
-  Navigate('/')
+  navigate('/')
  } catch (error) {
  
   if(error.response.status === 401){
@@ -45,7 +45,9 @@ setEmail(event.target.value)
    return toast.error('Please enter correct password')
   }
   if(error.response.status === 404){
+      navigate('/signup')
     return toast.error('Please sign up first')
+  
   }
   
  }
