@@ -110,7 +110,7 @@ let research = async (some) =>{
       console.log(res);
     } catch (error) {
       console.log(`THIS IS ERROR:${error}`);
-      if(error.response.status == 401){
+      if(error && error.response && error.response.status == 401){
         toast.error('limit reached')
       }
     }
