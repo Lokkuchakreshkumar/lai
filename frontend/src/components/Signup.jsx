@@ -69,7 +69,7 @@ setEmail(event.target.value)
  }
   }
  return (
-    <div className="newbc min-h-screen flex flex-col justify-center items-center ">
+    <div className="newbc min-h-screen flex flex-col p-4 justify-center items-center ">
   {
     !loading &&  
      <div>   <div>
