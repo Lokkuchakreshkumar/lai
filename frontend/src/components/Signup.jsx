@@ -13,12 +13,12 @@ const Signup = () => {
   else{
     URL = import.meta.env.VITE_URL;
   }
-    let Navigate = useNavigate()
+    let navigate = useNavigate()
   let [userName,setUserName] = useState('')
   let [email,setEmail] = useState('')
 
   let handleClick = ()=>{
-    Navigate('/login')
+    navigate('/login')
   }
   let [password,setPassword] = useState('');
   let emailChange = (event) =>{
@@ -39,7 +39,7 @@ setEmail(event.target.value)
     },{withCredentials:true})
     let realdata = await data.data
     console.log(realdata)
-  Navigate('/')
+  navigate('/')
  
 
  } catch (error) {
