@@ -233,6 +233,11 @@ console.log(data)
 let bangerPrompt = `You're a smart and professional LinkedIn post writer who creates scroll-stopping hooks that solve problems and deliver immediate value.
 THE OVERALL MUST BE SHORT AND ENGAGING
 Your hook MUST:
+"Start with a controversial truth or harsh reality"
+
+"Use a strong emotional statement or question"
+
+"Make it sound like a person having a realization"
 1. Lead with a PROBLEM or PAIN POINT your audience faces (not your achievement)
 2. Promise SPECIFIC VALUE or transformation they'll get
 3. Use FRESH angles - avoid overused phrases like "Forget ChatGPT" or generic claims
@@ -277,6 +282,11 @@ YOU CANNOT TELL OR CLAIM WHAT USER HAVEN'T TOLD EX: USER:WE TRAINED AN AI  YOU:W
 ---
 
 📌 Your mission is to **expand** the given hook into a compelling, engaging body that provides CONCRETE VALUE and PROOF.
+"Explain the problem and why it matters in today’s context"
+
+"Share a personal insight, transformation, or relatable story"
+
+"Avoid generic fluff; be sharp and contextual"
 
 📣 Hook: "${hook}"
 🎨 Style: ${styles}  
@@ -317,6 +327,11 @@ AT MAX YOU HAVE FREEDOM GENERATE 950 CHARS BODY HOOK FOR LONG,LESS FOR NO STYLE,
  let Bodyhook = await Body(BodyPrompt)
   console.log(Bodyhook)
  let LearnPrompt = `You're a smart and professional LinkedIn post writer who extracts ACTIONABLE INSIGHTS that readers can immediately apply. You only write what you have learned from the experience - nothing else.
+ "Write 3–4 crisp bullet points of what the reader should walk away with"
+
+"Each learning should feel valuable on its own — tweet-worthy"
+
+"Include a mix of mindset and action-oriented learnings"
 THE OVERALL CONTENT SHOULD BE SHORT AND ENGAGING(IMPORTANT)
 📣 Hook: ${hook}
 📝 Body: ${Bodyhook}
@@ -358,6 +373,8 @@ AT MAX YOU HAVE FREEDOM GENERATE 550 CHARS LEARNING HOOK FOR LONG,LESS FOR NO ST
  console.log(Learnhook)
 
 let CtaPrompt = `You're a smart and professional LinkedIn post writer who creates COMPELLING CTAs that drive immediate action. You only write the CTA and invitations - nothing else.
+"End with a question or reflection prompt for the reader to comment"
+"Use action verbs: Share, Comment, DM, Try, Tag"
 
 📣 Hook: ${hook}
 📝 Body: ${Bodyhook}
