@@ -110,8 +110,11 @@ let research = async (some) =>{
       toast.remove('final')
       console.log(res);
     } catch (error) {
-         toast.remove('final');
+       toast.remove('final');
       toast.remove('write')
+       toast.dismiss('understand');
+        toast.dismiss('final');
+      toast.dismiss('write')
        toast.remove('understand');
       console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
@@ -212,6 +215,9 @@ let handleTech = async() =>{
       console.log(error);
       toast.remove('final');
       toast.remove('write')
+       toast.dismiss('understand');
+        toast.dismiss('final');
+      toast.dismiss('write')
        toast.remove('understand');
         console.log(`THIS IS ERROR:${error}`);
       if(error && error.response && error.response.status == 401){
