@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
 const Signup = () => {
   const fpPromise = FingerprintJS.load();
