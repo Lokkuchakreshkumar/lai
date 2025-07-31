@@ -706,6 +706,7 @@ console.log(data)
 })
 
 app.post('/signup',async( req,res)=>{
+  let credits;
   const {userName,email,password,visitorId} = req.body;
 const userExist = await User.findOne({email})
 const deviceExist = await User.findOne({visitorId})
@@ -721,10 +722,10 @@ if(deviceExist){
 }
 const hashed = await bcrypt.hash(password,10);
 if(email.includes("@kluniversity.in")){
-  credits = 15;
+credits = 15;
 }
 else{
-  credits=5;
+ credits=5;
 }
 const newUser = new User({userName:userName,email:email,password:hashed,visitorId:visitorId,credits:credits});
 await newUser.save();
