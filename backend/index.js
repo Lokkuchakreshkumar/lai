@@ -720,7 +720,13 @@ if(deviceExist){
   })
 }
 const hashed = await bcrypt.hash(password,10);
-const newUser = new User({userName:userName,email:email,password:hashed,visitorId:visitorId});
+if(email.includes("@kluniversity.in")){
+  credits = 15;
+}
+else{
+  credits=5;
+}
+const newUser = new User({userName:userName,email:email,password:hashed,visitorId:visitorId,credits:credits});
 await newUser.save();
 const token = jwt.sign({id:newUser._id},JWT_SECRET,{expiresIn:'30d'});
 res.cookie('token',token,{
