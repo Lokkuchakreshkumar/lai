@@ -663,6 +663,9 @@ let googleSearch= `https://techcrunch.com/latest/`
      }
     })
   })
+  if(data.length==0){
+    res.send('no data found');
+  }
   res.json(data)
  } catch (error) {
   console.log(error)
