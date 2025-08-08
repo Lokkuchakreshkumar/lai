@@ -664,6 +664,9 @@ let googleSearch= `https://techcrunch.com/latest/`
   res.json(data)
  } catch (error) {
   console.log(error)
+  res.send(
+    "puppetteer error"
+  )
  }
 })
 app.post('/research',async(req,res)=>{
