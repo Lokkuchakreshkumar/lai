@@ -663,8 +663,10 @@ let googleSearch= `https://techcrunch.com/latest/`
         href: tag.href      
       }
      }
+     return null;
     })
   })
+  await browser.close();
   if(data.length==0){
     res.send('no data found');
   }
