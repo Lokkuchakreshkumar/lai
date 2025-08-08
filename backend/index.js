@@ -632,8 +632,9 @@ res.send(enhancedPrompt)
 
 })
 app.post('/Tech',async(req,res)=>{
- try {
   console.log('just in');
+ try {
+  
    puppeteer.use(StealthPlugin());
    const browser = await puppeteer.launch({
     headless: true,
