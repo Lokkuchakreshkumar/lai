@@ -633,7 +633,7 @@ res.send(enhancedPrompt)
 })
 app.post('/Tech',async(req,res)=>{
   console.log('just in');
- try {
+ 
   
    puppeteer.use(StealthPlugin());
    const browser = await puppeteer.launch({
@@ -669,12 +669,9 @@ let googleSearch= `https://techcrunch.com/latest/`
     res.send('no data found');
   }
   res.json(data)
- } catch (error) {
-  console.log(error)
-  res.send(
-    "puppetteer error"
-  )
- }
+
+
+ 
 })
 app.post('/research',async(req,res)=>{
     puppeteer.use(StealthPlugin());
