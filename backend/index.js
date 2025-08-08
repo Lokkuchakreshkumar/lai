@@ -653,7 +653,7 @@ args: [
 
 let googleSearch= `https://techcrunch.com/latest/`
   await page.goto(googleSearch,{waitUntil:'networkidle2'})
-  await setTimeout(5000);
+  await page.waitForSelector('h3.loop-card__title',{timeout:10000})
   let data = await page.$$eval('h3.loop-card__title',(elements)=>{
  return   elements.map((el)=>{
        let tag =   el.querySelector('a') 
