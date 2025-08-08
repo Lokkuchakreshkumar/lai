@@ -652,7 +652,7 @@ args: [
   const page = await browser.newPage();
 
 let googleSearch= `https://techcrunch.com/latest/`
-  await page.goto(googleSearch,{waitUntil:'networkidle2'})
+  await page.goto(googleSearch,{waitUntil:'domcontentloaded',timeout:20000})
   await page.waitForSelector('h3.loop-card__title',{timeout:10000})
   let data = await page.$$eval('h3.loop-card__title',(elements)=>{
  return   elements.map((el)=>{
