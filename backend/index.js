@@ -3,6 +3,7 @@ import cors from "cors"
 import { GoogleGenAI, Tokens } from "@google/genai";
 const app = express();
 app.set("trust proxy", 1);
+import { setTimeout } from "timers/promises";
 
 import mongoose from "mongoose"
 import dotenv from "dotenv"
@@ -649,7 +650,8 @@ args: [
   const page = await browser.newPage();
 
 let googleSearch= `https://techcrunch.com/latest/`
-  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+  await page.goto(googleSearch,{waitUntil:'networkidle2'})
+  await setTimeout(5000);
   let data = await page.$$eval('h3.loop-card__title',(elements)=>{
  return   elements.map((el)=>{
        let tag =   el.querySelector('a') 
@@ -688,7 +690,10 @@ args: [
   const page = await browser.newPage();
 
 let googleSearch= `${search}`
-  await page.goto(googleSearch,{waitUntil:'domcontentloaded'})
+  await page.goto(googleSearch,{waitUntil:'domcontentloaded'});
+  setTimeout(()=>{
+    console.log("waiting")
+  },5000)
  let data = await page.$$eval('p.wp-block-paragraph',(elements)=>{
   return elements.map((el)=>{
     return el.textContent;
